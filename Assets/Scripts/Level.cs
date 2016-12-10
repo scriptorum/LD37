@@ -15,6 +15,9 @@ public class Level : MonoBehaviour
 
 	[HeaderAttribute("Prefabs")]
 	public GameObject portalPrefab;
+	public GameObject hammerPrefab;
+	public GameObject orbPrefab;
+	public GameObject playerPrefab;
 
 	public void Awake()
 	{
@@ -42,6 +45,16 @@ public class Level : MonoBehaviour
 					go = Create(portalPrefab);
 					Portal portal = go.GetComponent<Portal>();
 					portal.Init(levelManager, item);
+					break;
+
+				case ItemType.Hammer:
+					go = Create(hammerPrefab);
+					break;
+
+				case ItemType.Orb:
+					go = Create(orbPrefab);
+					Orb orb = go.GetComponent<Orb>();
+					orb.Init(levelManager, item);
 					break;
 
 				default:

@@ -16,7 +16,8 @@ public class LevelManager : MonoBehaviour
 	public Sprite portalReturn;
 
 	[HideInInspector]
-	public int number = -99999; // last loaded number
+	public int number = -99999;
+	// last loaded number
 	[HideInInspector]
 	public bool cacheNeedsUpdate = false;
 
@@ -29,13 +30,23 @@ public class LevelManager : MonoBehaviour
 	public void OnValidate()
 	{
 		cacheNeedsUpdate = true;
+		foreach(LevelData level in levels)
+		{
+			level.name = "Room " + level.number.ToString();
+			for(int i = 0; i < level.items.Length; i++)
+			{
+				level.items[i].name = level.items[i].type.ToString();
+				if(level.items[i].type == ItemType.Portal) level.items[i].name += " " + level.items[i].portalType;
+				if(level.items[i].type == ItemType.Tool) level.items[i].name += " " + level.items[i].toolOperation;
+				level.items[i].name += " " + level.items[i].number;
+			}
+		}
 	}
 
 	public void UpdateCache()
 	{
 		levelCache = new Dictionary<int,LevelData>();
-		foreach(LevelData level in levels)
-			levelCache[level.number] = level;
+		foreach(LevelData level in levels) levelCache[level.number] = level;
 	}
 
 	public void SetImprint(int level)
@@ -55,10 +66,10 @@ public class LevelManager : MonoBehaviour
 		throw new UnityException("Cannot load level " + level);
 	}
 
-//	public void Save()
-//	{
-//		if(levelCache.ContainsKey(level.number)) throw new UnityException("Found duplicate level map number:" + level.number);
-//	}
+	//	public void Save()
+	//	{
+	//		if(levelCache.ContainsKey(level.number)) throw new UnityException("Found duplicate level map number:" + level.number);
+	//	}
 }
 
 [System.Serializable]
@@ -74,6 +85,9 @@ public class LevelData
 [System.Serializable]
 public struct Item
 {
+	[HideInInspector]
+	public string name;
+
 	public ItemType type;
 	public int number;
 	public  Point point;
@@ -109,6 +123,7 @@ public enum ToolOperation
 
 public enum PortalType
 {
+	None,
 	Open,
 	Closed,
 	Return

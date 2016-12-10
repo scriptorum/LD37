@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 114776482697605276}
   - component: {fileID: 114856212822673220}
   m_Layer: 5
-  m_Name: PortalCanvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 50
+  m_Text: 0
 --- !u!114 &114736680730521934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,14 +181,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
+    name: Portal Return 0
     type: 0
-    number: 50
+    number: 0
     point:
       x: 5
       y: 5
     toolOperation: 0
     toolNumberIsDynamic: 0
-    portalType: 0
+    portalType: 3
 --- !u!114 &114776482697605276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,7 +258,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300002, guid: 517f66f3b26814b379df803db6f40473, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
