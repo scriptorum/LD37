@@ -26,6 +26,17 @@ public class Portal : MonoBehaviour
 		// Set portal appearance
 		text.text = item.number.ToString();
 		portalNum.gameObject.SetActive(item.portalType != PortalType.Closed);
-		sr.sprite = (item.portalType == PortalType.Open ? mgr.portalOpen : (item.portalType == PortalType.Closed ? mgr.portalOpen : mgr.portalReturn));
+		switch(item.portalType)
+		{
+			case PortalType.Open:
+				sr.sprite = mgr.portalOpen;
+				break;
+			case PortalType.Closed:
+				sr.sprite = mgr.portalClosed;
+				break;
+			case PortalType.Return:
+				sr.sprite = mgr.portalReturn;
+				break;
+		}
 	}
 }
