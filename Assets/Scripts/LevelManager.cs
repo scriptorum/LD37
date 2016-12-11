@@ -87,6 +87,20 @@ public class LevelManager : MonoBehaviour
 
 		throw new UnityException("Cannot load level " + level);
 	}
+		
+	// On level "number," changes the first item at a specific point to the new item
+	public void ChangeItem(int number, Point point, Item newItem)
+	{
+		LevelData data = levelCache[number];
+		for(int i = 0; i < data.items.Length; i++)
+		{
+			if(data.items[i].point == point)
+			{
+				data.items[i] = newItem;
+				return;
+			}
+		}
+	}
 }
 
 [System.Serializable]

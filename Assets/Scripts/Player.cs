@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	public GameObject hammerInInventory;
 	public Game game;
 	public float speed = 10.0f;
 	public bool mustReleaseInputs = false;
@@ -43,5 +44,11 @@ public class Player : MonoBehaviour
 		Debug.Log("Moving Player to " + target.position + " local:" + target.localPosition + " portal:" + portal.item.name);
 		transform.position = target.position;
 		mustReleaseInputs = true;
+	}
+
+	public void TakeHammer()
+	{
+		hasHammer = true;
+		hammerInInventory.SetActive(true);
 	}
 }

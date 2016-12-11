@@ -53,13 +53,16 @@ public class Game : MonoBehaviour
 		Color endColor2 = messageShadow.color;
 		endColor2.a = 0;
 
+		messageBar.gameObject.SetActive(true);
+		messageShadow.gameObject.SetActive(true);
+
 		aq.Reset();
-		aq.Add(() => gameObject.SetActive(true));
 		aq.Delay(messageHold);
 		aq.AddCoroutine(startColor1.LerpColor(endColor1, messageFade, (Color c) => messageBar.color = c));
 		aq.AddCoroutine(startColor2.LerpColor(endColor2, messageFade, (Color c) => messageShadow.color = c));
 		aq.Delay(messageFade);
-		aq.Add(() => gameObject.SetActive(false));
+		aq.Add(() => messageBar.gameObject.SetActive(false));
+		aq.Add(() => messageShadow.gameObject.SetActive(false));
 		aq.Run();
 	}
 

@@ -51,12 +51,13 @@ public class Level : MonoBehaviour
 
 				case ItemType.Hammer:
 					go = Create(hammerPrefab);
+					go.GetComponent<Hammer>().Init(game);
 					break;
 
 				case ItemType.Orb:
 					go = Create(orbPrefab);
 					Orb orb = go.GetComponent<Orb>();
-					orb.Init(game.levelManager, item);
+					orb.Init(game, item);
 					break;
 
 				default:
@@ -71,6 +72,24 @@ public class Level : MonoBehaviour
 			game.player.ArriveAt(returnPortal);
 		}
 
+	}
+
+	public void ChangeOrbToPortal(Orb orb)
+	{
+		// Change LevelManager item from orb to portal so it respawns correctly when returning to this room
+		Item newItem = orb.item;
+		newItem.type = ItemType.Portal;
+		newItem.portalType = PortalType.Open;
+		game.levelManager.ChangeItem(number, orb.item.point, newItem);
+
+		// Create Portal
+		GameObject go = Create(portalPrefab);
+		go.transform.parent = orb.transform.parent;
+		go.transform.position = orb.transform.position;
+		go.GetComponent<Portal>().Init(game, newItem);
+
+		// Destroy Orb
+		Object.Destroy(orb.gameObject);
 	}
 
 	private GameObject Create(GameObject prefab)

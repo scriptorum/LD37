@@ -189,7 +189,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1369883517643206}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 5, z: 0}
+  m_LocalPosition: {x: -5, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4779516189334706}
@@ -299,7 +299,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: -99999
+  m_Text: 15
 --- !u!114 &114736680730521934
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,15 +313,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 0}
   item:
-    name: Portal Return -99999
+    name: Portal Open 15
     type: 0
-    number: -99999
+    number: 15
     point:
-      x: 5
-      y: 5
+      x: -5
+      y: -4
     toolOperation: 0
     toolNumberIsDynamic: 0
-    portalType: 3
+    portalType: 1
 --- !u!114 &114776482697605276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game: {fileID: 0}
   message: Portal
-  onTrigger:
+  onEnter:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114736680730521934}
@@ -386,6 +386,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onExit:
+    m_PersistentCalls:
+      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!212 &212473659458796066
@@ -419,7 +424,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300004, guid: 517f66f3b26814b379df803db6f40473, type: 3}
+  m_Sprite: {fileID: 21300002, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
