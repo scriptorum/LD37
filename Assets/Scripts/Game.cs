@@ -53,12 +53,11 @@ public class Game : MonoBehaviour
 		Color endColor2 = messageShadow.color;
 		endColor2.a = 0;
 
-		StopAllCoroutines();
 		aq.Reset();
 		aq.Add(() => gameObject.SetActive(true));
 		aq.Delay(messageHold);
-		aq.Add(() => StartCoroutine(startColor1.LerpColor(endColor1, messageFade, (Color c) => messageBar.color = c)));
-		aq.Add(() => StartCoroutine(startColor2.LerpColor(endColor2, messageFade, (Color c) => messageShadow.color = c)));
+		aq.AddCoroutine(startColor1.LerpColor(endColor1, messageFade, (Color c) => messageBar.color = c));
+		aq.AddCoroutine(startColor2.LerpColor(endColor2, messageFade, (Color c) => messageShadow.color = c));
 		aq.Delay(messageFade);
 		aq.Add(() => gameObject.SetActive(false));
 		aq.Run();
