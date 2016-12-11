@@ -6,6 +6,7 @@ using Spewnity;
 
 public class Portal : MonoBehaviour
 {
+	public Game game;
 	public Item item;
 
 	public void Awake()
@@ -16,6 +17,7 @@ public class Portal : MonoBehaviour
 	public void Init(Game game, Item newItem)
 	{
 		this.item = newItem;
+		this.game = game;
 
 		// Reference some objects
 		Text text = transform.GetComponentInChildren<Text>();
@@ -42,5 +44,21 @@ public class Portal : MonoBehaviour
 		}
 
 		text.text = item.number.ToString();
+	}
+
+	public void SetMessage()
+	{
+		switch(item.portalType)
+		{
+			case PortalType.Open:
+				game.SetMessage("This portal leads to room " + item.number);
+				break;
+			case PortalType.Closed:
+				game.SetMessage("This portal is currently closed!");
+				break;
+			case PortalType.Return:
+				game.SetMessage("This is the back of the portal from room " + item.number);
+				break;
+		}
 	}
 }

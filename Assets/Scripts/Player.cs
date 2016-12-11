@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 	public Game game;
 	public float speed = 10.0f;
 	public bool mustReleaseInputs = false;
+	public bool hasHammer = false;
 	
 	// Update is called once per frame
 	void Update()
@@ -38,7 +39,8 @@ public class Player : MonoBehaviour
 
 	public void ArriveAt(Portal portal)
 	{
-		Transform target = portal.transform.FindChild("Arrival");
+		Transform target = portal.transform.Find("Arrival");
+		Debug.Log("Moving Player to " + target.position + " local:" + target.localPosition + " portal:" + portal.item.name);
 		transform.position = target.position;
 		mustReleaseInputs = true;
 	}

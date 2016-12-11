@@ -36,6 +36,7 @@ public class Level : MonoBehaviour
 		Clear();
 
 		LevelData data = game.levelManager.Load(levelNo);
+		Portal returnPortal = null;
 		foreach(Item item in data.items)
 		{
 			switch(item.type)
@@ -45,7 +46,7 @@ public class Level : MonoBehaviour
 					Portal portal = go.GetComponent<Portal>();
 					portal.Init(game, item);
 					if(item.portalType == PortalType.Return)
-						game.player.ArriveAt(portal);
+						returnPortal = portal;
 					break;
 
 				case ItemType.Hammer:
@@ -65,6 +66,9 @@ public class Level : MonoBehaviour
 			// Set parent and position
 			go.transform.parent = transform;
 			go.transform.localPosition = new Vector3(item.point.x, item.point.y, 0);
+
+			returnPortal.ThrowIfNull();
+			game.player.ArriveAt(returnPortal);
 		}
 
 	}

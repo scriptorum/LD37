@@ -53,6 +53,7 @@ public class Game : MonoBehaviour
 		Color endColor2 = messageShadow.color;
 		endColor2.a = 0;
 
+		StopAllCoroutines();
 		aq.Reset();
 		aq.Add(() => gameObject.SetActive(true));
 		aq.Delay(messageHold);
