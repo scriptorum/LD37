@@ -23,26 +23,11 @@ public class Player : MonoBehaviour
 		}
 		
 		transform.Translate(speedx, speedy, 0);
-	}
-
-	public void OnTriggerEnter2D(Collider2D other)
-	{
-		if(other.tag == "Portal")
-		{
-			Portal portal = other.gameObject.GetComponent<Portal>();
-
-			if(portal.item.portalType == PortalType.Closed) return;
-
-			Debug.Log("Teleporting to " + portal.item.number);
-			game.TeleportTo(portal.item.number, portal.item.portalType);
-		}
-	}
+	}		
 
 	public void ArriveAt(Portal portal)
 	{
-		Transform target = portal.transform.Find("Arrival");
-		Debug.Log("Moving Player to " + target.position + " local:" + target.localPosition + " portal:" + portal.item.name);
-		transform.position = target.position;
+		transform.position = portal.transform.position;
 		mustReleaseInputs = true;
 	}
 

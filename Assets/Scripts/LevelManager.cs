@@ -15,9 +15,9 @@ public class LevelManager : MonoBehaviour
 	public Sprite portalClosed;
 	public Sprite portalReturn;
 
-	[HideInInspector]
+	[HideInInspector] // last loaded number
 	public int number = Level.NO_LEVEL;
-	// last loaded number
+
 	[HideInInspector]
 	public bool cacheNeedsUpdate = false;
 

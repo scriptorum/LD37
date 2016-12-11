@@ -28,7 +28,7 @@ public class Game : MonoBehaviour
 	public void Start()
 	{
 		SetMessage("Escape! Follow the portals to room ONE.");
-		level.Load(startLevel);
+		level.Load(startLevel, false, startLevel);
 	}
 
 	public void ClearMessage()
@@ -68,12 +68,22 @@ public class Game : MonoBehaviour
 
 	public void TeleportTo(int targetLevel, PortalType portalType)
 	{
+		if(!levelManager.IsValidLevel(targetLevel))
+		{
+			// TODO Go to procedural level based on number
+			SetMessage("No. You can see monsters through that portal.");
+			return;
+		}
+		
 		if(portalType == PortalType.Open)
+		{
 			levelManager.SetReturnPortal(targetLevel, level.number);
-
+			level.Load(targetLevel, false, targetLevel);
+		}
 		else if(portalType == PortalType.Return)
-			levelManager.SetReturnPortal(level.number, Level.NO_LEVEL);
-
-		level.Load(targetLevel);
+		{
+//			levelManager.SetReturnPortal(level.number, Level.NO_LEVEL);
+			level.Load(targetLevel, true, level.number);
+		}
 	}
 }

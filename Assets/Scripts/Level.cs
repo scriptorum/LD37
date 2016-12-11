@@ -28,7 +28,7 @@ public class Level : MonoBehaviour
 		Clear();
 	}
 
-	public void Load(int levelNo)
+	public void Load(int levelNo, bool returning, int portalNo)
 	{
 		priorLevel = number;
 		number = levelNo;
@@ -36,17 +36,28 @@ public class Level : MonoBehaviour
 		Clear();
 
 		LevelData data = game.levelManager.Load(levelNo);
-		Portal returnPortal = null;
+		Portal arrivalPortal = null;
+		Debug.Log("Number of items in room " + number + ": " + data.items.Length);
+
 		foreach(Item item in data.items)
 		{
+			Debug.Log("ITEM:" + item.type + " " + item.number + " " + item.portalType);
 			switch(item.type)
 			{
 				case ItemType.Portal:
 					go = Create(portalPrefab);
 					Portal portal = go.GetComponent<Portal>();
 					portal.Init(game, item);
-					if(item.portalType == PortalType.Return)
-						returnPortal = portal;
+
+					if(returning) // returning to sending portal 
+					{
+						if(item.portalType == PortalType.Open && item.number == portalNo) arrivalPortal = portal;
+					}
+					else // arriving at return portal
+					{
+						if(item.portalType == PortalType.Return) arrivalPortal = portal;
+					}
+
 					break;
 
 				case ItemType.Hammer:
@@ -67,11 +78,9 @@ public class Level : MonoBehaviour
 			// Set parent and position
 			go.transform.parent = transform;
 			go.transform.localPosition = new Vector3(item.point.x, item.point.y, 0);
-
-			returnPortal.ThrowIfNull();
-			game.player.ArriveAt(returnPortal);
 		}
-
+		arrivalPortal.ThrowIfNull();
+		game.player.ArriveAt(arrivalPortal);
 	}
 
 	public void ChangeOrbToPortal(Orb orb)
@@ -109,24 +118,12 @@ public class Level : MonoBehaviour
 	public static void  ReadLevel(MenuCommand cmd)
 	{
 		Level level = (Level) cmd.context;		
-		level.Load(level.number);
-	}
-
-	public void Reload()
-	{
-		if(game.levelManager.IsValidLevel(number))
-		{
-			Clear();
-			Load(number);
-			game.levelManager.SetImprint(number);
-		}
-		else Debug.Log("Not valid level:" + number);
+		level.Load(level.number, false, 0);
 	}
 
 	public void OnValidate()
 	{
-		if(game.levelManager.number != number)
-			Invoke("Reload", 0.25f);
+		if(game.levelManager.number != number) Invoke("Reload", 0.25f);
 	}
 	#endif
 }

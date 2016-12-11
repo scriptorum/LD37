@@ -8,11 +8,7 @@ public class Portal : MonoBehaviour
 {
 	public Game game;
 	public Item item;
-
-	public void Awake()
-	{
-		
-	}
+	public bool hover = false;
 
 	public void Init(Game game, Item newItem)
 	{
@@ -46,19 +42,37 @@ public class Portal : MonoBehaviour
 		text.text = item.number.ToString();
 	}
 
-	public void SetMessage()
+	public void Hover()
 	{
+		hover = true;
 		switch(item.portalType)
 		{
 			case PortalType.Open:
-				game.SetMessage("This portal leads to room " + item.number);
+				game.SetMessage("SPACE to travel through this portal to room " + item.number);
 				break;
 			case PortalType.Closed:
 				game.SetMessage("This portal is currently closed!");
 				break;
 			case PortalType.Return:
-				game.SetMessage("This is the back of the portal from room " + item.number);
+				game.SetMessage("SPACE to travel back to room " + item.number);
 				break;
+		}
+	}
+
+	public void Unhover()
+	{
+		hover = false;
+		game.ClearMessage();
+	}
+
+	public void Update()
+	{
+		if(hover && Input.GetKeyDown(KeyCode.Space))
+		{
+			if(item.portalType == PortalType.Closed) return;
+
+			Debug.Log("Teleporting to " + item.number);
+			game.TeleportTo(item.number, item.portalType);
 		}
 	}
 }
