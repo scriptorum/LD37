@@ -10,14 +10,18 @@ using UnityEditor;
 
 public class Level : MonoBehaviour
 {
+	public static int NO_LEVEL = -99999;
+
 	public LevelManager levelManager;
-	public int number;
+	public int number = NO_LEVEL;
+	public int priorLevel = NO_LEVEL;
 
 	[HeaderAttribute("Prefabs")]
 	public GameObject portalPrefab;
 	public GameObject hammerPrefab;
 	public GameObject orbPrefab;
 	public GameObject playerPrefab;
+	public Game game;
 
 	public void Awake()
 	{
@@ -32,9 +36,12 @@ public class Level : MonoBehaviour
 
 	public void Load(int levelNo)
 	{
-		number = levelNo;
+		priorLevel = number;
+ 		number = levelNo;
 		GameObject go;
 		Clear();
+
+		// TODO teleport player
 
 		LevelData data = levelManager.Load(levelNo);
 		foreach(Item item in data.items)
@@ -44,7 +51,7 @@ public class Level : MonoBehaviour
 				case ItemType.Portal:
 					go = Create(portalPrefab);
 					Portal portal = go.GetComponent<Portal>();
-					portal.Init(levelManager, item);
+					portal.Init(game, item);
 					break;
 
 				case ItemType.Hammer:
@@ -65,6 +72,7 @@ public class Level : MonoBehaviour
 			go.transform.parent = transform;
 			go.transform.localPosition = new Vector3(item.point.x, item.point.y, 0);
 		}
+
 	}
 
 	private GameObject Create(GameObject prefab)
@@ -81,17 +89,6 @@ public class Level : MonoBehaviour
 	}
 
 	#if UNITY_EDITOR
-	[MenuItem("CONTEXT/Level/Write Level")]
-	public static void WriteLevel(MenuCommand cmd)
-	{
-		Level level = (Level) cmd.context;
-//		LevelManager mgr = level.levelManager;
-		foreach(Transform child in level.transform)
-		{
-			Debug.Log("« over " + child.name);
-		}
-	}
-
 	[MenuItem("CONTEXT/Level/Read Level")]
 	public static void  ReadLevel(MenuCommand cmd)
 	{

@@ -10,11 +10,12 @@ public class Portal : MonoBehaviour
 
 	public void Awake()
 	{
+		
 	}
 
-	public void Init(LevelManager mgr, Item item)
+	public void Init(Game game, Item newItem)
 	{
-		this.item = item;
+		this.item = newItem;
 
 		// Reference some objects
 		Text text = transform.GetComponentInChildren<Text>();
@@ -24,19 +25,22 @@ public class Portal : MonoBehaviour
 		SpriteRenderer sr = transform.FindChild("PortalFrame").GetComponent<SpriteRenderer>();
 
 		// Set portal appearance
-		text.text = item.number.ToString();
 		portalNum.gameObject.SetActive(item.portalType != PortalType.Closed);
 		switch(item.portalType)
 		{
 			case PortalType.Open:
-				sr.sprite = mgr.portalOpen;
+				sr.sprite = game.levelManager.portalOpen;
 				break;
 			case PortalType.Closed:
-				sr.sprite = mgr.portalClosed;
+				sr.sprite = game.levelManager.portalClosed;
 				break;
 			case PortalType.Return:
-				sr.sprite = mgr.portalReturn;
+				// Hide default return portal
+				if(item.number == Level.NO_LEVEL && Application.isPlaying) gameObject.SetActive(false);
+				else sr.sprite = game.levelManager.portalReturn;
 				break;
 		}
+
+		text.text = item.number.ToString();
 	}
 }

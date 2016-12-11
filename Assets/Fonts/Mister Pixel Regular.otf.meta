@@ -12,9 +12,10 @@ TrueTypeFontImporter:
   fontName: VTF MisterPixel
   fontNames:
   - VTF MisterPixel
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: bc492ca89efe549a88267e110af5f048, type: 3}
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   userData: 
   assetBundleName: 
