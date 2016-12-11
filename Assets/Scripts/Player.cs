@@ -6,24 +6,21 @@ public class Player : MonoBehaviour
 {
 	public Game game;
 	public float speed = 10.0f;
+	public bool mustReleaseInputs = false;
 	
 	// Update is called once per frame
-	void Update () 
+	void Update()
 	{
 		float speedx = Input.GetAxisRaw("Horizontal") * Time.deltaTime * speed;
 		float speedy = Input.GetAxisRaw("Vertical") * Time.deltaTime * speed;
-		transform.Translate(speedx, speedy, 0);
-	}
 
-	public void TeleportTo(int level, PortalType portalType)
-	{
-		if(portalType == PortalType.Open)
-			game.levelManager.SetReturnPortal(level, game.level.number);
-
-		else if(portalType == PortalType.Return)
-			game.levelManager.SetReturnPortal(game.level.number, Level.NO_LEVEL);
+		if(mustReleaseInputs)
+		{
+			if(speedx == 0 && speedy == 0) mustReleaseInputs = false;
+			else return;
+		}
 		
-		game.level.Load(level);
+		transform.Translate(speedx, speedy, 0);
 	}
 
 	public void OnTriggerEnter2D(Collider2D other)
@@ -32,11 +29,17 @@ public class Player : MonoBehaviour
 		{
 			Portal portal = other.gameObject.GetComponent<Portal>();
 
-			if(portal.item.portalType == PortalType.Closed)
-				return;
+			if(portal.item.portalType == PortalType.Closed) return;
 
 			Debug.Log("Teleporting to " + portal.item.number);
-			TeleportTo(portal.item.number, portal.item.portalType);
+			game.TeleportTo(portal.item.number, portal.item.portalType);
 		}
+	}
+
+	public void ArriveAt(Portal portal)
+	{
+		Transform target = portal.transform.FindChild("Arrival");
+		transform.position = target.position;
+		mustReleaseInputs = true;
 	}
 }

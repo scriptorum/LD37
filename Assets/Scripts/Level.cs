@@ -12,7 +12,6 @@ public class Level : MonoBehaviour
 {
 	public static int NO_LEVEL = -99999;
 
-	public LevelManager levelManager;
 	public int number = NO_LEVEL;
 	public int priorLevel = NO_LEVEL;
 
@@ -25,25 +24,18 @@ public class Level : MonoBehaviour
 
 	public void Awake()
 	{
-		levelManager.ThrowIfNull();
+		game.levelManager.ThrowIfNull();
 		Clear();
-	}
-
-	public void OnValidate()
-	{
-		if(levelManager.number != number) levelManager.SetImprint(number);
 	}
 
 	public void Load(int levelNo)
 	{
 		priorLevel = number;
- 		number = levelNo;
+		number = levelNo;
 		GameObject go;
 		Clear();
 
-		// TODO teleport player
-
-		LevelData data = levelManager.Load(levelNo);
+		LevelData data = game.levelManager.Load(levelNo);
 		foreach(Item item in data.items)
 		{
 			switch(item.type)
@@ -52,6 +44,8 @@ public class Level : MonoBehaviour
 					go = Create(portalPrefab);
 					Portal portal = go.GetComponent<Portal>();
 					portal.Init(game, item);
+					if(item.portalType == PortalType.Return)
+						game.player.ArriveAt(portal);
 					break;
 
 				case ItemType.Hammer:
@@ -61,7 +55,7 @@ public class Level : MonoBehaviour
 				case ItemType.Orb:
 					go = Create(orbPrefab);
 					Orb orb = go.GetComponent<Orb>();
-					orb.Init(levelManager, item);
+					orb.Init(game.levelManager, item);
 					break;
 
 				default:
@@ -77,8 +71,7 @@ public class Level : MonoBehaviour
 
 	private GameObject Create(GameObject prefab)
 	{
-		if(Application.isPlaying)
-			return Instantiate(prefab);
+		if(Application.isPlaying) return Instantiate(prefab);
 		else return PrefabUtility.InstantiatePrefab(prefab) as GameObject;
 	}
 
@@ -94,6 +87,23 @@ public class Level : MonoBehaviour
 	{
 		Level level = (Level) cmd.context;		
 		level.Load(level.number);
+	}
+
+	public void Reload()
+	{
+		if(game.levelManager.IsValidLevel(number))
+		{
+			Clear();
+			Load(number);
+			game.levelManager.SetImprint(number);
+		}
+		else Debug.Log("Not valid level:" + number);
+	}
+
+	public void OnValidate()
+	{
+		if(game.levelManager.number != number)
+			Invoke("Reload", 0.25f);
 	}
 	#endif
 }

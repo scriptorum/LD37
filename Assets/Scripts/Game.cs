@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
 {
 	public Level level;
 	public LevelManager levelManager;
+	public Player player;
 
 	public int startLevel;
 	public float messageHold = 3.0f;
@@ -60,5 +61,16 @@ public class Game : MonoBehaviour
 		aq.Delay(messageFade);
 		aq.Add(() => gameObject.SetActive(false));
 		aq.Run();
+	}
+
+	public void TeleportTo(int targetLevel, PortalType portalType)
+	{
+		if(portalType == PortalType.Open)
+			levelManager.SetReturnPortal(targetLevel, level.number);
+
+		else if(portalType == PortalType.Return)
+			levelManager.SetReturnPortal(level.number, Level.NO_LEVEL);
+
+		level.Load(targetLevel);
 	}
 }

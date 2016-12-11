@@ -40,6 +40,11 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
+	public bool IsValidLevel(int levelNo)
+	{
+		return levelCache.ContainsKey(levelNo);
+	}
+
 	public void OnValidate()
 	{
 		cacheNeedsUpdate = true;
@@ -63,6 +68,7 @@ public class LevelManager : MonoBehaviour
 	{
 		levelCache = new Dictionary<int,LevelData>();
 		foreach(LevelData level in levels) levelCache[level.number] = level;
+		cacheNeedsUpdate = false;
 	}
 
 	public void SetImprint(int level)
