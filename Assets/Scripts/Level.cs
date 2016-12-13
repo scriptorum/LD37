@@ -19,7 +19,12 @@ public class Level : MonoBehaviour
 	public GameObject portalPrefab;
 	public GameObject hammerPrefab;
 	public GameObject orbPrefab;
+	public GameObject toolPrefab;
 	public GameObject playerPrefab;
+	public Sprite adderSprite;
+	public Sprite subtracterSprite;
+	public Sprite multiplierSprite;
+	public Sprite dividerSprite;
 	public Game game;
 
 	public void Awake()
@@ -37,11 +42,9 @@ public class Level : MonoBehaviour
 
 		LevelData data = game.levelManager.Load(levelNo);
 		Portal arrivalPortal = null;
-		Debug.Log("Number of items in room " + number + ": " + data.items.Length);
 
 		foreach(Item item in data.items)
 		{
-			Debug.Log("ITEM:" + item.type + " " + item.number + " " + item.portalType);
 			switch(item.type)
 			{
 				case ItemType.Portal:
@@ -71,6 +74,12 @@ public class Level : MonoBehaviour
 					orb.Init(game, item);
 					break;
 
+				case ItemType.Tool:
+					go = Create(toolPrefab);
+					Tool tool = go.GetComponent<Tool>();
+					tool.Init(game, item);
+					break;
+
 				default:
 					throw new UnityException("Not implemented:" + item.type);
 			}
@@ -79,6 +88,7 @@ public class Level : MonoBehaviour
 			go.transform.parent = transform;
 			go.transform.localPosition = new Vector3(item.point.x, item.point.y, 0);
 		}
+
 		arrivalPortal.ThrowIfNull();
 		game.player.ArriveAt(arrivalPortal);
 	}

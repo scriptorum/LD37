@@ -27,7 +27,8 @@ public class Game : MonoBehaviour
 
 	public void Start()
 	{
-		SetMessage("Escape! Follow the portals to room ONE.");
+		
+		SetMessage("Escape! Follow the portals to ROOM ONE.");
 		level.Load(startLevel, false, startLevel);
 	}
 

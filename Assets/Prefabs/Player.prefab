@@ -110,10 +110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerInInventory: {fileID: 0}
+  adderInInventory: {fileID: 0}
+  subtracterInInventory: {fileID: 0}
+  dividerInInventory: {fileID: 0}
+  multiplierInInventory: {fileID: 0}
   game: {fileID: 0}
   speed: 10
   mustReleaseInputs: 0
   hasHammer: 0
+  hasAdder: 0
+  hasSubtracter: 0
+  hasDivider: 0
+  hasMultiplier: 0
 --- !u!212 &212067168418216284
 SpriteRenderer:
   m_ObjectHideFlags: 1
