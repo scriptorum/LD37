@@ -67,9 +67,9 @@ public class Tool : MonoBehaviour
 	{
 		if(hover && Input.GetKeyDown(KeyCode.Space))
 		{
-			game.player.TakeTool(item.toolOperation);
+			game.inventory.TakeActive(ItemType.Tool, item.toolOperation, Level.NO_LEVEL);
 			Object.Destroy(this.gameObject);
-			game.SetMessage("You pick up the Portal " + getToolType() + ". A/D to select it, S to use it.");
+			game.SetMessage("You pick up the Portal " + getToolType() + ". Q/E to select it, R to use it.");
 		}
 	}
 }

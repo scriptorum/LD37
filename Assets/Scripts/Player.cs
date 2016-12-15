@@ -4,28 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	public GameObject hammerInInventory;
-	public GameObject adderInInventory;
-	public GameObject subtracterInInventory;
-	public GameObject dividerInInventory;
-	public GameObject multiplierInInventory;
 	public Game game;
 	public float speed = 10.0f;
 	public bool mustReleaseInputs = false;
-	public bool hasHammer = false;
-	public bool hasAdder = false;
-	public bool hasSubtracter = false;
-	public bool hasDivider = false;
-	public bool hasMultiplier = false;
-
-	public void Awake()
-	{
-		hammerInInventory.SetActive(false);
-		adderInInventory.SetActive(false);
-		subtracterInInventory.SetActive(false);
-		dividerInInventory.SetActive(false);
-		multiplierInInventory.SetActive(false);
-	}
 
 	// Update is called once per frame
 	void Update()
@@ -46,36 +27,5 @@ public class Player : MonoBehaviour
 	{
 		transform.position = portal.transform.position;
 		mustReleaseInputs = true;
-	}
-
-	public void TakeHammer()
-	{
-		hasHammer = true;
-		hammerInInventory.SetActive(true);
-	}
-
-	public void TakeTool(ToolOperation toolOp)
-	{
-		switch(toolOp)
-		{
-			case ToolOperation.Add:
-				hasAdder = true;
-				adderInInventory.SetActive(true);
-				break;
-			case ToolOperation.Subtract:
-				hasSubtracter = true;
-				subtracterInInventory.SetActive(true);
-				break;
-			case ToolOperation.Divide:
-				hasDivider = true;
-				dividerInInventory.SetActive(true);
-				break;
-			case ToolOperation.Multiply:
-				hasMultiplier = true;
-				multiplierInInventory.SetActive(true);
-				break;
-			default:
-				throw new UnityException("Unsupposed tool operation:" + toolOp);
-		}
 	}
 }

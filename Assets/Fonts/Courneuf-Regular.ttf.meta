@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bc492ca89efe549a88267e110af5f048
-timeCreated: 1481361629
+guid: 680beb7d22f4d4c74b6dd14eba602700
+timeCreated: 1481761553
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,13 +9,12 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: VTF MisterPixel
+  fontName: Courneuf
   fontNames:
-  - VTF MisterPixel
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: a59a5a2f7a53f427a9e10bbc51feac6b, type: 3}
+  - Courneuf
+  fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 2
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   userData: 
   assetBundleName: 

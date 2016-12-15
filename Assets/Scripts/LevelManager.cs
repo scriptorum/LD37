@@ -131,6 +131,7 @@ public struct Item
 
 public enum ItemType
 {
+	None,
 	Portal,
 	Orb,
 	Hammer,
