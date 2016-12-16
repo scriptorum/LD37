@@ -30,7 +30,7 @@ public class InventorySlot : MonoBehaviour
         tool.ThrowIfNull();
         slot.ThrowIfNull();
 
-        Reconfigure();
+        Redraw();
     }
 
     public void Init(ItemType type, ToolOperation op, int number, bool selected = false)
@@ -39,16 +39,16 @@ public class InventorySlot : MonoBehaviour
         this.op = op;
         this.number = number;
         this.selected = selected;
-        Reconfigure();
+        Redraw();
     }
 
 	public void Select(bool enabled)
 	{
 		selected = enabled;
-		Reconfigure();
+		Redraw();
 	}
 
-    private void Reconfigure()
+    public void Redraw()
     {
         if (type == ItemType.None)
         {

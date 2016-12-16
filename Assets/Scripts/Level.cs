@@ -96,16 +96,15 @@ public class Level : MonoBehaviour
 	public void ChangeOrbToPortal(Orb orb)
 	{
 		// Change LevelManager item from orb to portal so it respawns correctly when returning to this room
-		Item newItem = orb.item;
-		newItem.type = ItemType.Portal;
-		newItem.portalType = PortalType.Open;
-		game.levelManager.ChangeItem(number, orb.item.point, newItem);
+		orb.item.type = ItemType.Portal;
+		orb.item.portalType = PortalType.Open;
+		game.levelManager.ChangeItem(number, orb.item);
 
 		// Create Portal
 		GameObject go = Create(portalPrefab);
 		go.transform.parent = orb.transform.parent;
 		go.transform.position = orb.transform.position;
-		go.GetComponent<Portal>().Init(game, newItem);
+		go.GetComponent<Portal>().Init(game, orb.item);
 
 		// Destroy Orb
 		Object.Destroy(orb.gameObject);

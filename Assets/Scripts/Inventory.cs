@@ -66,8 +66,6 @@ public class Inventory : MonoBehaviour
             ChangeSelected(-1);
         else if (Input.GetKeyDown(KeyCode.E))
             ChangeSelected(1);
-        else if (Input.GetKeyDown(KeyCode.R))
-            UseSelected();
     }
 
     public void ChangeSelected(int offset)
@@ -77,13 +75,15 @@ public class Inventory : MonoBehaviour
             selected = active - 1;
         else if (selected >= active)
             selected = 0;
-        
-        foreach(InventorySlot slot in activeSlots)
+
+        foreach (InventorySlot slot in activeSlots)
             slot.Select(slot.id == selected);
     }
 
-    public void UseSelected()
+    public InventorySlot GetActiveSlot()
     {
-        Debug.Log("UseSelected not implemented");
+        if(selected == -1)
+            return null;
+        return activeSlots[selected];
     }
 }

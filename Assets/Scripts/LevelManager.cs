@@ -88,18 +88,25 @@ public class LevelManager : MonoBehaviour
 		throw new UnityException("Cannot load level " + level);
 	}
 		
-	// On level "number," changes the first item at a specific point to the new item
-	public void ChangeItem(int number, Point point, Item newItem)
+	// Changes the item in question
+	// Places this item at the point on on the level "number" it contains
+	public void ChangeItem(int roomNo, Item item)
 	{
-		LevelData data = levelCache[number];
+
+		if(!levelCache.ContainsKey(roomNo))
+			throw new UnityException("LevelManager cannot find room " + roomNo);
+
+		LevelData data = levelCache[roomNo];
 		for(int i = 0; i < data.items.Length; i++)
 		{
-			if(data.items[i].point == point)
+			if(data.items[i].point == item.point)
 			{
-				data.items[i] = newItem;
+				data.items[i] = item;
 				return;
 			}
 		}
+
+		throw new UnityException("LevelManager cannot find item at " + item.point + " in room " + roomNo);
 	}
 }
 
