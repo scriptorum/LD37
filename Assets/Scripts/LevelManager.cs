@@ -92,7 +92,6 @@ public class LevelManager : MonoBehaviour
 	// Places this item at the point on on the level "number" it contains
 	public void ChangeItem(int roomNo, Item item)
 	{
-
 		if(!levelCache.ContainsKey(roomNo))
 			throw new UnityException("LevelManager cannot find room " + roomNo);
 

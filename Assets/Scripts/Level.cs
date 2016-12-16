@@ -65,7 +65,7 @@ public class Level : MonoBehaviour
 
 				case ItemType.Hammer:
 					go = Create(hammerPrefab);
-					go.GetComponent<Hammer>().Init(game);
+					go.GetComponent<Hammer>().Init(game, item);
 					break;
 
 				case ItemType.Orb:
@@ -79,6 +79,9 @@ public class Level : MonoBehaviour
 					Tool tool = go.GetComponent<Tool>();
 					tool.Init(game, item);
 					break;
+
+				case ItemType.None:
+					continue;
 
 				default:
 					throw new UnityException("Not implemented:" + item.type);
