@@ -129,10 +129,13 @@ public struct Item
 	public int number;
 	public Point point;
 
-	[HeaderAttribute("Not applicable to all items")]
+	[HeaderAttribute("If this is a tool")]
 	public ToolOperation toolOperation;
-	public bool toolNumberIsDynamic;
+
+	[HeaderAttribute("If this is a portal")]
 	public PortalType portalType;
+	public ToolOperation installedTool;
+	public int installedNumber;
 }
 
 public enum ItemType

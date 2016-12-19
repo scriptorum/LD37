@@ -524,32 +524,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212473659458796066, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300004, guid: 517f66f3b26814b379df803db6f40473,
-        type: 3}
     - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
         type: 2}
       propertyPath: game
       value: 
       objectReference: {fileID: 561127321}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.point.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.point.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.portalType
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
   m_IsPrefabParent: 0
@@ -981,6 +960,9 @@ MonoBehaviour:
   subtracterSprite: {fileID: 21300002, guid: 0e00a712c993e4622be230ced1811a96, type: 3}
   multiplierSprite: {fileID: 21300004, guid: 0e00a712c993e4622be230ced1811a96, type: 3}
   dividerSprite: {fileID: 21300006, guid: 0e00a712c993e4622be230ced1811a96, type: 3}
+  portalNumSprite: {fileID: 21300000, guid: f365e0a3e194b41b8a471b4df2d70ce7, type: 3}
+  portalNumWithToolSprite: {fileID: 21300002, guid: f365e0a3e194b41b8a471b4df2d70ce7,
+    type: 3}
   game: {fileID: 561127321}
 --- !u!4 &1649534805
 Transform:
@@ -1181,8 +1163,9 @@ MonoBehaviour:
         x: 5
         y: 5
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 3
+      installedTool: 0
+      installedNumber: 0
     - name: Portal Open 50
       type: 1
       number: 50
@@ -1190,8 +1173,9 @@ MonoBehaviour:
         x: -5
         y: 5
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
     - name: Portal Closed 98
       type: 1
       number: 98
@@ -1199,8 +1183,9 @@ MonoBehaviour:
         x: 0
         y: -5
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 2
+      installedTool: 0
+      installedNumber: 0
   - name: Room 50
     number: 50
     items:
@@ -1211,8 +1196,9 @@ MonoBehaviour:
         x: -5
         y: 5
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 3
+      installedTool: 0
+      installedNumber: 0
     - name: Hammer 0
       type: 3
       number: 0
@@ -1220,8 +1206,9 @@ MonoBehaviour:
         x: 1
         y: 4
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 2
+      installedTool: 0
+      installedNumber: 0
     - name: Orb 10
       type: 2
       number: 10
@@ -1229,8 +1216,9 @@ MonoBehaviour:
         x: 2
         y: -4
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 2
+      installedTool: 0
+      installedNumber: 0
     - name: Portal Open 15
       type: 1
       number: 15
@@ -1238,8 +1226,9 @@ MonoBehaviour:
         x: -5
         y: -4
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
   - name: Room 15
     number: 15
     items:
@@ -1250,8 +1239,9 @@ MonoBehaviour:
         x: 5
         y: 0
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 3
+      installedTool: 0
+      installedNumber: 0
     - name: Portal Open 50
       type: 1
       number: 50
@@ -1259,8 +1249,9 @@ MonoBehaviour:
         x: -6
         y: 2
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
     - name: Portal Open 99
       type: 1
       number: 99
@@ -1268,8 +1259,9 @@ MonoBehaviour:
         x: -2
         y: -5
       toolOperation: 0
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
     - name: Tool Add -99999
       type: 4
       number: -99999
@@ -1277,8 +1269,9 @@ MonoBehaviour:
         x: 2
         y: 2
       toolOperation: 1
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
     - name: Tool Subtract -99999
       type: 4
       number: -99999
@@ -1286,8 +1279,9 @@ MonoBehaviour:
         x: 0
         y: 2
       toolOperation: 2
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
     - name: Tool Multiply -99999
       type: 4
       number: -99999
@@ -1295,8 +1289,9 @@ MonoBehaviour:
         x: -2
         y: 2
       toolOperation: 3
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
     - name: Tool Divide -99999
       type: 4
       number: -99999
@@ -1304,8 +1299,9 @@ MonoBehaviour:
         x: -4
         y: 2
       toolOperation: 4
-      toolNumberIsDynamic: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
   portalOpen: {fileID: 21300002, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   portalClosed: {fileID: 21300000, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   portalReturn: {fileID: 21300004, guid: 517f66f3b26814b379df803db6f40473, type: 3}

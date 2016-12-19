@@ -25,6 +25,8 @@ public class Level : MonoBehaviour
 	public Sprite subtracterSprite;
 	public Sprite multiplierSprite;
 	public Sprite dividerSprite;
+	public Sprite portalNumSprite;
+	public Sprite portalNumWithToolSprite;
 	public Game game;
 
 	public void Awake()

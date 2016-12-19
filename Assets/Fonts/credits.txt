@@ -1,0 +1,9 @@
+Courneuf-Regular - 9 px height pixel font
+Copyright Thomas Jund
+Source: https://github.com/Sacripant/courneuf.font
+
+Mister Pixel Regular - 16 px height pixel font
+Copyright Christophe Badani 
+Source: http://www.velvetyne.fr/
+
+
