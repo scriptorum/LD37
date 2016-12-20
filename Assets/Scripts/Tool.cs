@@ -14,51 +14,51 @@ public class Tool : MonoBehaviour
 		this.item = item;
 
 		SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
-		switch(item.toolOperation)
+		switch(item.toolType)
 		{
-			case ToolOperation.Add:
+			case ToolType.Add:
 				sr.sprite = game.level.adderSprite;
 				break;
-			case ToolOperation.Subtract:
+			case ToolType.Subtract:
 				sr.sprite = game.level.subtracterSprite;
 				break;
-			case ToolOperation.Divide:
+			case ToolType.Divide:
 				sr.sprite = game.level.dividerSprite;
 				break;
-			case ToolOperation.Multiply:
+			case ToolType.Multiply:
 				sr.sprite = game.level.multiplierSprite;
 				break;
 			default:
-				throw new UnityException("Unknown tool type:" + item.toolOperation);		
+				throw new UnityException("Unknown tool type:" + item.toolType);		
 		}
 	}
 
 	public string getToolType()
 	{
-		switch(item.toolOperation)
+		switch(item.toolType)
 		{
-			case ToolOperation.Add:
+			case ToolType.Add:
 				return "Adder";
-			case ToolOperation.Subtract:
+			case ToolType.Subtract:
 				return "Subtracter";
-			case ToolOperation.Divide:
+			case ToolType.Divide:
 				return "Divider";
-			case ToolOperation.Multiply:
+			case ToolType.Multiply:
 				return "Multiplier";			
 		}
-		throw new UnityException("Unknown tool type:" + item.toolOperation);
+		throw new UnityException("Unknown tool type:" + item.toolType);
 	}
 
 	public void Hover()
 	{
-		Debug.Log(item.toolOperation + " HOVER!");
+		// Debug.Log(item.toolOperation + " HOVER!");
 		hover = true;
 		game.SetMessage("SPACE to pick up this Portal " + getToolType());
 	}
 
 	public void Unhover()
 	{
-		Debug.Log(item.toolOperation + " unhover...");
+		// Debug.Log(item.toolOperation + " unhover...");
 		hover = false;
 		game.ClearMessage();
 	}
@@ -67,7 +67,9 @@ public class Tool : MonoBehaviour
 	{
 		if(hover && Input.GetKeyDown(KeyCode.Space))
 		{
-			game.inventory.TakeActive(ItemType.Tool, item.toolOperation, Level.NO_LEVEL);
+			game.inventory.TakeActive(ItemType.Tool, item.toolType, Level.NO_LEVEL);
+			item.type = ItemType.None;
+			game.levelManager.ChangeItem(game.level.number, item);
 			Object.Destroy(this.gameObject);
 			game.SetMessage("You pick up the Portal " + getToolType() + ". Q/E to select it, R to use it.");
 		}

@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
 			{
 				data.items[i].name = data.items[i].type.ToString();
 				if(data.items[i].type == ItemType.Portal) data.items[i].name += " " + data.items[i].portalType;
-				if(data.items[i].type == ItemType.Tool) data.items[i].name += " " + data.items[i].toolOperation;
+				if(data.items[i].type == ItemType.Tool) data.items[i].name += " " + data.items[i].toolType;
 				data.items[i].name += " " + data.items[i].number;
 				if(data.items[i].type == ItemType.Portal && data.items[i].portalType == PortalType.Return) numReturns++;
 			}
@@ -130,11 +130,11 @@ public struct Item
 	public Point point;
 
 	[HeaderAttribute("If this is a tool")]
-	public ToolOperation toolOperation;
+	public ToolType toolType;
 
 	[HeaderAttribute("If this is a portal")]
 	public PortalType portalType;
-	public ToolOperation installedTool;
+	public ToolType installedTool;
 	public int installedNumber;
 }
 
@@ -153,7 +153,7 @@ public enum ItemType
 	Map
 }
 
-public enum ToolOperation
+public enum ToolType
 {
 	None,
 	Add,

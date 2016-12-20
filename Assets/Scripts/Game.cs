@@ -63,20 +63,20 @@ public class Game:MonoBehaviour {
 		aq.Run(); 
 	}
 
-	public void TeleportTo(int targetLevel, PortalType portalType) {
-		if ( ! levelManager.IsValidLevel(targetLevel)) {
+	public void TeleportTo(int destination, PortalType portalType) {
+		if ( ! levelManager.IsValidLevel(destination)) {
 			// TODO Go to procedural level based on number
 			SetMessage("No. You can see monsters through that portal."); 
 			return; 
 		}
 		
 		if (portalType == PortalType.Open) {
-			levelManager.SetReturnPortal(targetLevel, level.number); 
-			level.Load(targetLevel, false, targetLevel); 
+			levelManager.SetReturnPortal(destination, level.number); 
+			level.Load(destination, false, destination); 
 		}
 		else if (portalType == PortalType.Return) {
 //			levelManager.SetReturnPortal(level.number, Level.NO_LEVEL);
-			level.Load(targetLevel, true, level.number); 
+			level.Load(destination, true, level.number); 
 		}
 	}
 }

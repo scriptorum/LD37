@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> passiveSlots = new List<InventorySlot>();
     public List<InventorySlot> activeSlots = new List<InventorySlot>();
     int selected = -1; // Selected active slot
-    int active = 0;
+    int activeSlotsInUse = 0;
 
     public void Awake()
     {
@@ -28,23 +28,23 @@ public class Inventory : MonoBehaviour
     public void TakePassive(ItemType type)
     {
         InventorySlot slot = FindEmpty(passiveSlots);
-        slot.Init(type, ToolOperation.None, 0);
+        slot.Init(type, ToolType.None, 0);
     }
 
-    public void TakeActive(ItemType type, ToolOperation op, int number)
+    public void TakeActive(ItemType type, ToolType op, int number)
     {
         InventorySlot slot = FindEmpty(activeSlots);
         slot.Init(type, op, number, selected == -1);
-        if (selected == -1)
-            selected = slot.id;
-        active++;
+        selected = slot.id;
+        activeSlotsInUse++;
+        UpdateSlots();
     }
 
     public bool HasPassive(ItemType type)
     {
         foreach (InventorySlot slot in passiveSlots)
         {
-            if (slot.type == type)
+            if (slot.itemType == type)
                 return true;
         }
         return false;
@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (InventorySlot slot in slots)
         {
-            if (slot.type == ItemType.None)
+            if (slot.itemType == ItemType.None)
                 return slot;
         }
         throw new UnityException("Cannot find empty slot");
@@ -70,20 +70,43 @@ public class Inventory : MonoBehaviour
 
     public void ChangeSelected(int offset)
     {
-        selected -= offset;
-        if (selected < 0)
-            selected = active - 1;
-        else if (selected >= active)
-            selected = 0;
+        if (activeSlotsInUse <= 0)
+            selected = -1;
 
+        else
+        {
+            selected -= offset;
+            if (selected < 0)
+                selected = activeSlots.Count - 1;
+            else if (selected >= activeSlots.Count)
+                selected = 0;
+        }
+
+        if (selected >= 0 && activeSlots[selected].itemType == ItemType.None)
+        {
+            ChangeSelected(offset);
+            return;
+        }
+
+        UpdateSlots();
+    }
+
+    public void UpdateSlots()
+    {
         foreach (InventorySlot slot in activeSlots)
             slot.Select(slot.id == selected);
     }
 
     public InventorySlot GetActiveSlot()
     {
-        if(selected == -1)
+        if (selected == -1)
             return null;
         return activeSlots[selected];
+    }
+
+    public void RemoveSlot()
+    {
+        activeSlotsInUse--;
+        ChangeSelected(-1);
     }
 }

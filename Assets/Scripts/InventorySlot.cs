@@ -12,8 +12,8 @@ public class InventorySlot : MonoBehaviour
     private SpriteRenderer tool;
     private SpriteRenderer slot;
 
-    public ItemType type = ItemType.None;
-    public ToolOperation op = ToolOperation.None;
+    public ItemType itemType = ItemType.None;
+    public ToolType toolType = ToolType.None;
     public int number = Level.NO_LEVEL;
     public bool selectable = false;
     public bool selected = false;
@@ -30,27 +30,27 @@ public class InventorySlot : MonoBehaviour
         tool.ThrowIfNull();
         slot.ThrowIfNull();
 
-        Redraw();
+        UpdateView();
     }
 
-    public void Init(ItemType type, ToolOperation op, int number, bool selected = false)
+    public void Init(ItemType type, ToolType op, int number, bool selected = false)
     {
-        this.type = type;
-        this.op = op;
+        this.itemType = type;
+        this.toolType = op;
         this.number = number;
         this.selected = selected;
-        Redraw();
+        UpdateView();
     }
 
 	public void Select(bool enabled)
 	{
 		selected = enabled;
-		Redraw();
+		UpdateView();
 	}
 
-    public void Redraw()
+    public void UpdateView()
     {
-        if (type == ItemType.None)
+        if (itemType == ItemType.None)
         {
             gameObject.SetActive(false);
             return;
@@ -58,7 +58,7 @@ public class InventorySlot : MonoBehaviour
 
         gameObject.SetActive(true);
 
-        switch (type)
+        switch (itemType)
         {
             case ItemType.Hammer:
                 selectable = false;
@@ -68,18 +68,18 @@ public class InventorySlot : MonoBehaviour
 
             case ItemType.Tool:
                 selectable = true;
-                switch (op)
+                switch (toolType)
                 {
-                    case ToolOperation.Add:
+                    case ToolType.Add:
                         tool.sprite = inventory.addTool;
                         break;
-                    case ToolOperation.Subtract:
+                    case ToolType.Subtract:
                         tool.sprite = inventory.subtractTool;
                         break;
-                    case ToolOperation.Divide:
+                    case ToolType.Divide:
                         tool.sprite = inventory.divideTool;
                         break;
-                    case ToolOperation.Multiply:
+                    case ToolType.Multiply:
                         tool.sprite = inventory.multiplyTool;
                         break;
                 }
@@ -87,11 +87,25 @@ public class InventorySlot : MonoBehaviour
                 break;
 
             default:
-                throw new UnityException("Unsupported item type:" + type);
+                throw new UnityException("Unsupported item type:" + itemType);
         }
 
         if (selectable)
             slot.sprite = selected ? inventory.slotActive : inventory.slotInactive;
         else slot.sprite = inventory.slotPassive;
+    }
+
+    // Removes the inventory slot
+    public void Remove()
+    {
+        // Remove slot
+        itemType = ItemType.None;         
+
+        // Notify inventory
+        inventory.RemoveSlot();
+
+        // Update view
+        UpdateView();
+        
     }
 }
