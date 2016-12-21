@@ -88,7 +88,7 @@ namespace Spewnity
         private void UpdateView()
         {
 #if DEBUG
-            if (sequence == null)
+            if (sequence == null || sr == null)
                 return;
 
             if (frame < 0 || frame >= sequence.frameArray.Count)
@@ -161,9 +161,9 @@ namespace Spewnity
             serializedObject.ApplyModifiedProperties();
 
             // Support live preview
-            Anim anim = (Anim) target;
-            if(anim.livePreview)
-            	EditorUtility.SetDirty(target);
+            Anim anim = (Anim)target;
+            if (anim.livePreview)
+                EditorUtility.SetDirty(target);
         }
     }
 
@@ -180,5 +180,21 @@ namespace Spewnity
         public List<int> frameArray; // frame string expanded to array
         [HideInInspector]
         public float deltaTime;
+    }
+
+    [CustomPropertyDrawer(typeof(AnimSequence))]
+    public class AnimSequenceDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect pos, SerializedProperty prop, GUIContent label)
+        {
+            EditorGUI.BeginProperty(pos, label, prop);
+            int indentLevel = EditorGUI.indentLevel;
+            EditorGUI.indentLevel = 0;
+            EditorGUI.PropertyField(new Rect(pos.x, pos.y, 80, pos.height), prop.FindPropertyRelative("name"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(pos.x + 85, pos.y, 50, pos.height), prop.FindPropertyRelative("fps"), GUIContent.none);
+            EditorGUI.PropertyField(new Rect(pos.x + 140, pos.y, pos.width - 140, pos.height), prop.FindPropertyRelative("frames"), GUIContent.none);
+            EditorGUI.indentLevel = indentLevel;
+            EditorGUI.EndProperty();
+        }
     }
 }
