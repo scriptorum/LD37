@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEditorInternal;
 
 /**
  * A lightweight 2D animator.
+ * Drag sprite frames to the frames array (you may have to lock the Anim's GameObject in the inspector).
+ * Then specify animations with a unique name and definition. A definition consists of frame numbers 
+ * (corresponding to the frames array) that are comma-separated. The definition may also include ranges
+ * in the form of min-max (inclusive).
  */
 namespace Spewnity
 {
+    [ExecuteInEditMode]
     public class Anim : MonoBehaviour
     {
+        public bool livePreview;
+        public string currentAnim;
         public List<Sprite> frames;
         public List<AnimSequence> sequences;
-        public string currentAnim;
-        public int frame = 0;
+        private int frame = 0;
         private AnimSequence currentSeq;
         private float elapsed = 0;
         private Dictionary<string, AnimSequence> cache;
@@ -38,6 +46,8 @@ namespace Spewnity
         public void OnValidate()
         {
             UpdateFrameArrays();
+			// if(currentSeq.name != currentAnim)
+			// 	Play(currentSeq.name);
         }
 
         public void Play(string name)
@@ -102,6 +112,33 @@ namespace Spewnity
             }
         }
     }
+
+	[CustomEditor(typeof(Anim))]
+	public class AnimEditor: Editor
+	{
+        private SerializedProperty frames;
+        private SerializedProperty sequences;
+
+		public void OnEnable()
+		{
+            frames = serializedObject.FindProperty("frames");
+            sequences = serializedObject.FindProperty("sequences");
+		}
+
+		public override void OnInspectorGUI()
+		{
+			serializedObject.Update();
+
+			Anim anim = (Anim) target;
+			anim.livePreview = EditorGUILayout.Toggle("Live Preview", anim.livePreview);
+			if(anim.livePreview)
+				EditorUtility.SetDirty(target);
+            anim.currentAnim = EditorGUILayout.DelayedTextField(anim.currentAnim);
+            EditorGUILayout.PropertyField(frames, true);
+            EditorGUILayout.PropertyField(sequences, true);
+			serializedObject.ApplyModifiedProperties();
+		}
+	}
 
     [System.Serializable]
     public class AnimSequence
