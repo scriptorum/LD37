@@ -7,7 +7,7 @@ using UnityEditorInternal;
 /**
  * A lightweight 2D animator.
  * Drag sprite frames to the frames array (you may have to lock the Anim's GameObject in the inspector).
- * Then specify animations with a unique name and definition. A definition consists of frame numbers 
+ * Then specify animations with a unique name and frames. The frame definition consists of frame numbers 
  * (corresponding to the frames array) that are comma-separated. The definition may also include ranges
  * in the form of min-max (inclusive).
  */
@@ -17,64 +17,69 @@ namespace Spewnity
     public class Anim : MonoBehaviour
     {
         public bool livePreview;
-        public string currentAnim;
+        public string sequenceName;
         public List<Sprite> frames;
         public List<AnimSequence> sequences;
+
         private int frame = 0;
-        private AnimSequence currentSeq;
+        private AnimSequence sequence;
         private float elapsed = 0;
         private Dictionary<string, AnimSequence> cache;
         private SpriteRenderer sr;
 
         public void Awake()
         {
-            UpdateFrameArrays();
+            UpdateCache();
 
-            cache = new Dictionary<string, AnimSequence>();
-            foreach (AnimSequence seq in sequences)
-                cache.Add(seq.name, seq);
+            // Ensure there is a default SpriteRenderer
             sr = GetComponent<SpriteRenderer>();
             if (sr == null)
+            {
                 sr = gameObject.AddComponent<SpriteRenderer>();
+#if DEBUG
+                Debug.Log("DEBUG: No SpriteRenderer defined.");
+#endif                
+            }
         }
 
         public void Start()
         {
-            Play(currentAnim);
+            Play(sequenceName);
         }
 
         public void OnValidate()
         {
-            UpdateFrameArrays();
-			// if(currentSeq.name != currentAnim)
-			// 	Play(currentSeq.name);
+            UpdateCache();
+
+            if (sequence == null || sequence.name != sequenceName)
+                Play(sequenceName);
         }
 
         public void Play(string name)
         {
-            currentAnim = name;
-            frame = 0;
-            elapsed = 0;
-            currentSeq = cache[currentAnim];
-            if (currentSeq == null)
+            if (!cache.ContainsKey(name))
             {
-                Debug.Log("Cannot find sequence " + name);
+                Debug.Log("Unknown sequence name: " + name);
                 return;
             }
-            currentSeq.deltaTime = 1 / currentSeq.fps;
+
+            sequence = cache[name];
+            sequenceName = name;
+            frame = 0;
+            elapsed = 0;
             UpdateView();
         }
 
         public void Update()
         {
-            if (currentSeq == null)
+            if (sequence == null)
                 return;
 
             elapsed += Time.deltaTime;
-            if (elapsed >= currentSeq.deltaTime)
+            if (elapsed >= sequence.deltaTime)
             {
-                elapsed -= currentSeq.deltaTime;
-                if (++frame >= currentSeq.frameArray.Count)
+                elapsed -= sequence.deltaTime;
+                if (++frame >= sequence.frameArray.Count)
                     frame = 0;
                 UpdateView();
             }
@@ -82,18 +87,35 @@ namespace Spewnity
 
         private void UpdateView()
         {
-            int cel = currentSeq.frameArray[frame];
+#if DEBUG
+            if (sequence == null)
+                return;
+
+            if (frame < 0 || frame >= sequence.frameArray.Count)
+                return;
+#endif
+            int cel = sequence.frameArray[frame];
             sr.sprite = frames[cel];
         }
 
-        public void UpdateFrameArrays()
+        public void UpdateCache()
         {
+            // Recreate cache
+            cache = new Dictionary<string, AnimSequence>();
+            foreach (AnimSequence seq in sequences)
+                cache.Add(seq.name, seq);
+
+            // Preprocess sequence frames and fps
             foreach (AnimSequence seq in sequences)
             {
+                seq.deltaTime = 1 / seq.fps;
+                if (seq.deltaTime <= 0)
+                    Debug.Log("Illegal fps:" + seq.fps);
                 seq.frameArray = new List<int>();
-                seq.desc = seq.desc.Replace(" ", "");
-                foreach (string element in seq.desc.Split(','))
+                seq.frames = seq.frames.Replace(" ", "");
+                foreach (string element in seq.frames.Split(','))
                 {
+                    // TODO Error reporting
                     if (element.Contains("-"))
                     {
                         string[] extents = element.Split('-');
@@ -107,38 +129,43 @@ namespace Spewnity
                         int result = int.Parse(element);
                         seq.frameArray.Add(result);
                     }
-
                 }
             }
         }
     }
 
-	[CustomEditor(typeof(Anim))]
-	public class AnimEditor: Editor
-	{
+    [CustomEditor(typeof(Anim))]
+    public class AnimEditor : Editor
+    {
+        private SerializedProperty livePreview;
+        private SerializedProperty sequenceName;
         private SerializedProperty frames;
         private SerializedProperty sequences;
 
-		public void OnEnable()
-		{
+        public void OnEnable()
+        {
+            livePreview = serializedObject.FindProperty("livePreview");
+            sequenceName = serializedObject.FindProperty("sequenceName");
             frames = serializedObject.FindProperty("frames");
             sequences = serializedObject.FindProperty("sequences");
-		}
+        }
 
-		public override void OnInspectorGUI()
-		{
-			serializedObject.Update();
-
-			Anim anim = (Anim) target;
-			anim.livePreview = EditorGUILayout.Toggle("Live Preview", anim.livePreview);
-			if(anim.livePreview)
-				EditorUtility.SetDirty(target);
-            anim.currentAnim = EditorGUILayout.DelayedTextField(anim.currentAnim);
+        public override void OnInspectorGUI()
+        {
+            // Display standard inspector
+            serializedObject.Update();
+            EditorGUILayout.PropertyField(livePreview);
+            EditorGUILayout.PropertyField(sequenceName);
             EditorGUILayout.PropertyField(frames, true);
             EditorGUILayout.PropertyField(sequences, true);
-			serializedObject.ApplyModifiedProperties();
-		}
-	}
+            serializedObject.ApplyModifiedProperties();
+
+            // Support live preview
+            Anim anim = (Anim) target;
+            if(anim.livePreview)
+            	EditorUtility.SetDirty(target);
+        }
+    }
 
     [System.Serializable]
     public class AnimSequence
@@ -146,7 +173,7 @@ namespace Spewnity
         public string name;
 
         [TooltipAttribute("Comma separated list of frames and ranges, e.g: 1-7,9,12-10")]
-        public string desc;
+        public string frames;
         public float fps = 30;
 
         [HideInInspector]

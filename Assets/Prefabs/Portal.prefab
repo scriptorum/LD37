@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livePreview: 0
-  currentAnim: open
+  sequenceName: returned
   frames:
   - {fileID: 21300034, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   - {fileID: 21300036, guid: 517f66f3b26814b379df803db6f40473, type: 3}
@@ -253,20 +253,20 @@ MonoBehaviour:
   - {fileID: 21300066, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   sequences:
   - name: closed
-    desc: 0
+    frames: 0
     fps: 10
     frameArray: 00000000
-    deltaTime: 0
+    deltaTime: 0.1
   - name: open
-    desc: 1-8
+    frames: 1-8
     fps: 10
     frameArray: 0100000002000000030000000400000005000000060000000700000008000000
     deltaTime: 0.1
   - name: return
-    desc: 9-16
+    frames: 9-16
     fps: 10
     frameArray: 090000000a0000000b0000000c0000000d0000000e0000000f00000010000000
-    deltaTime: 0
+    deltaTime: 0.1
 --- !u!114 &114443913788763444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,7 +470,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300036, guid: 517f66f3b26814b379df803db6f40473, type: 3}
+  m_Sprite: {fileID: 21300066, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
