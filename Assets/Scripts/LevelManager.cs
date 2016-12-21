@@ -10,11 +10,6 @@ public class LevelManager : MonoBehaviour
 	public LevelData[] levels;
 	public Dictionary<int,LevelData> levelCache = new Dictionary<int,LevelData>();
 
-	[HeaderAttribute("Prefab refs")]
-	public Sprite portalOpen;
-	public Sprite portalClosed;
-	public Sprite portalReturn;
-
 	[HideInInspector] // last loaded number
 	public int number = Level.NO_LEVEL;
 

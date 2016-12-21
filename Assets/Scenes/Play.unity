@@ -725,42 +725,6 @@ Prefab:
       propertyPath: game
       value: 
       objectReference: {fileID: 561127321}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.name
-      value: Portal Return -99999
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.number
-      value: -99999
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.point.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114672314907061442, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114443913788763444, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Text
-      value: -99999
-      objectReference: {fileID: 0}
-    - target: {fileID: 212735959177551136, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f365e0a3e194b41b8a471b4df2d70ce7,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
   m_IsPrefabParent: 0
@@ -1473,9 +1437,6 @@ MonoBehaviour:
       portalType: 1
       installedTool: 0
       installedNumber: 0
-  portalOpen: {fileID: 21300002, guid: 517f66f3b26814b379df803db6f40473, type: 3}
-  portalClosed: {fileID: 21300000, guid: 517f66f3b26814b379df803db6f40473, type: 3}
-  portalReturn: {fileID: 21300018, guid: 517f66f3b26814b379df803db6f40473, type: 3}
   number: 99
   cacheNeedsUpdate: 1
 --- !u!4 &1813284758

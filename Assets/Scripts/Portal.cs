@@ -13,7 +13,7 @@ public class Portal : MonoBehaviour
     private Text toolText;
     private Transform portalNum;
     private SpriteRenderer portalNumSr;
-    private SpriteRenderer frameSR;
+    private Anim frameAnim;
 
     public void Init(Game game, Item newItem)
     {
@@ -24,7 +24,7 @@ public class Portal : MonoBehaviour
         portalNum = transform.FindChild("PortalNum");
         portalText = portalNum.FindChild("Canvas/Portal").GetComponentInChildren<Text>();
         toolText = portalNum.FindChild("Canvas/Tool").GetComponentInChildren<Text>();
-        frameSR = transform.FindChild("PortalFrame").GetComponent<SpriteRenderer>();
+        frameAnim = transform.FindChild("PortalFrame").GetComponent<Anim>();
         portalNumSr = portalNum.GetComponent<SpriteRenderer>();
 
         UpdateView();
@@ -37,15 +37,15 @@ public class Portal : MonoBehaviour
         switch (item.portalType)
         {
             case PortalType.Open:
-                frameSR.sprite = game.levelManager.portalOpen;
+                frameAnim.Play("open");
                 break;
             case PortalType.Closed:
-                frameSR.sprite = game.levelManager.portalClosed;
+                frameAnim.Play("closed");
                 break;
             case PortalType.Return:
                 // Hide default return portal
                 if (item.number == Level.NO_LEVEL && Application.isPlaying) gameObject.SetActive(false);
-                else frameSR.sprite = game.levelManager.portalReturn;
+                else frameAnim.Play("return");
                 break;
         }
 

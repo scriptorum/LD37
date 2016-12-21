@@ -38,8 +38,11 @@ public class Orb : MonoBehaviour
     {
         if (hover && Input.GetKeyDown(KeyCode.Space))
         {
-            game.SetMessage("A portal rises from the smashed orb.");
-            game.level.ChangeOrbToPortal(this);
+            if (game.inventory.HasPassive(ItemType.Hammer))
+            {
+                game.SetMessage("A portal rises from the smashed orb.");
+                game.level.ChangeOrbToPortal(this);
+            }
         }
     }
 }
