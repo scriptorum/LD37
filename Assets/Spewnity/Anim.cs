@@ -26,8 +26,9 @@ namespace Spewnity
     {
         public bool livePreview;
         public string sequenceName;
-        public List<Sprite> frames;
         public List<AnimSequence> sequences;
+        public List<Sprite> frames;
+        public bool paused = false;
 
         private int frame = 0;
         private AnimSequence sequence;
@@ -64,7 +65,7 @@ namespace Spewnity
         }
 
         public void Play(string name)
-        {
+        {            
             if (!cache.ContainsKey(name))
             {
                 Debug.Log("Unknown sequence name: " + name);
@@ -75,11 +76,40 @@ namespace Spewnity
             sequenceName = name;
             frame = 0;
             elapsed = 0;
+            paused = false;
             UpdateView();
+        }
+
+        // Pauses the animation on the current frame
+        // Will stay paused until you call Resume() or Play() another animation
+        public void Pause()
+        {
+            paused = true;
+        }
+
+        // Resumes a paused animation
+        public void Resume()
+        {
+            paused = false;
+        }
+
+        // Stops and clears the playing animation
+        public void Clear()
+        {
+            sequence = null;
+            sr.sprite = null;
         }
 
         public void Update()
         {
+            if(paused)
+                return;
+
+            #if UNITY_EDITOR
+            if(!Application.isPlaying && !livePreview)
+                return;
+            #endif
+
             if (sequence == null)
                 return;
 
@@ -95,13 +125,12 @@ namespace Spewnity
 
         private void UpdateView()
         {
-#if DEBUG
             if (sequence == null || sr == null)
                 return;
 
             if (frame < 0 || frame >= sequence.frameArray.Count)
                 return;
-#endif
+
             int cel = sequence.frameArray[frame];
             sr.sprite = frames[cel];
         }

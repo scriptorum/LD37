@@ -117,6 +117,27 @@ public class Portal : MonoBehaviour
 
     public void Update()
     {
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            Anim anim = GetComponentInChildren<Anim>();
+            anim.Pause();
+        }
+        if(Input.GetKeyDown(KeyCode.F2))
+        {
+            Anim anim = GetComponentInChildren<Anim>();
+            anim.Resume();
+        }
+        if(Input.GetKeyDown(KeyCode.F3))
+        {
+            Anim anim = GetComponentInChildren<Anim>();
+            anim.Clear();
+        }
+        if(Input.GetKeyDown(KeyCode.F4))
+        {
+            Anim anim = GetComponentInChildren<Anim>();
+            anim.Play(item.portalType.ToString().ToLower());
+        }
+
         if (!hover)
             return;
 
