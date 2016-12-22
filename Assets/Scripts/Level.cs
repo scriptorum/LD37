@@ -117,8 +117,12 @@ public class Level : MonoBehaviour
 
 	private GameObject Create(GameObject prefab)
 	{
+		#if UNITY_EDITOR
 		if(Application.isPlaying) return Instantiate(prefab);
 		else return PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+		#else
+		return Instantiate(prefab);
+		#endif
 	}
 
 	public void Clear()

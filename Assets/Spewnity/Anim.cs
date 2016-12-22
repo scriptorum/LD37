@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
+#endif
 
 /**
  * A lightweight 2D animator.
@@ -10,6 +13,11 @@ using UnityEditorInternal;
  * Then specify animations with a unique name and frames. The frame definition consists of frame numbers 
  * (corresponding to the frames array) that are comma-separated. The definition may also include ranges
  * in the form of min-max (inclusive).
+ * 
+ * To specify the initial animation, supply a sequenceName matching the name of one of your sequences.
+ * To change the sequence at runtime, call Play(). To view your initial animation in real time, check
+ * Live Preview. Note that the live preview may run slower than your normal frame rate. The GameObject 
+ * must have a SpriteRenderer attached.
  */
 namespace Spewnity
 {
@@ -134,6 +142,22 @@ namespace Spewnity
         }
     }
 
+    [System.Serializable]
+    public class AnimSequence
+    {
+        public string name;
+
+        [TooltipAttribute("Comma separated list of frames and ranges, e.g: 1-7,9,12-10")]
+        public string frames;
+        public float fps = 30;
+
+        [HideInInspector]
+        public List<int> frameArray; // frame string expanded to array
+        [HideInInspector]
+        public float deltaTime;
+    }
+
+#if UNITY_EDITOR
     [CustomEditor(typeof(Anim))]
     public class AnimEditor : Editor
     {
@@ -152,7 +176,7 @@ namespace Spewnity
 
         public override void OnInspectorGUI()
         {
-            // Display standard inspector
+            // Display inspector
             serializedObject.Update();
             EditorGUILayout.PropertyField(livePreview);
             EditorGUILayout.PropertyField(sequenceName);
@@ -165,21 +189,6 @@ namespace Spewnity
             if (anim.livePreview)
                 EditorUtility.SetDirty(target);
         }
-    }
-
-    [System.Serializable]
-    public class AnimSequence
-    {
-        public string name;
-
-        [TooltipAttribute("Comma separated list of frames and ranges, e.g: 1-7,9,12-10")]
-        public string frames;
-        public float fps = 30;
-
-        [HideInInspector]
-        public List<int> frameArray; // frame string expanded to array
-        [HideInInspector]
-        public float deltaTime;
     }
 
     [CustomPropertyDrawer(typeof(AnimSequence))]
@@ -197,4 +206,5 @@ namespace Spewnity
             EditorGUI.EndProperty();
         }
     }
+#endif
 }
