@@ -39,7 +39,7 @@ public class Level : MonoBehaviour
 	{
 		priorLevel = room;
 		room = levelNo;
-		GameObject go;
+		GameObject go = null;
 		Clear();
 
 		LevelDefinition data = game.levelManager.Load(levelNo);
@@ -82,6 +82,11 @@ public class Level : MonoBehaviour
 					tool.Init(game, item);
 					break;
 
+				case ItemType.Victory:
+					// TODO
+					Debug.Log("Victory!");
+				break;
+
 				case ItemType.None:
 					continue;
 
@@ -90,8 +95,11 @@ public class Level : MonoBehaviour
 			}
 
 			// Set parent and position
-			go.transform.parent = transform;
-			go.transform.localPosition = new Vector3(item.point.x, item.point.y, 0);
+			if(go != null)
+			{
+				go.transform.parent = transform;
+				go.transform.localPosition = new Vector3(item.point.x, item.point.y, 0);
+			}
 		}
 
 		arrivalPortal.ThrowIfNull("Arrival portal not set");
@@ -137,11 +145,6 @@ public class Level : MonoBehaviour
 	{
 		Level level = (Level) cmd.context;		
 		level.Load(level.room, false, 0);
-	}
-
-	public void OnValidate()
-	{
-		if(game.levelManager.room != room) Invoke("Reload", 0.25f);
 	}
 	#endif
 }

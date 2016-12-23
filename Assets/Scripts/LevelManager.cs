@@ -149,7 +149,8 @@ public enum ItemType
 	SpeedBoots,
 	Teleporter,
 	Spawner,
-	Map
+	Map,
+	Victory
 }
 
 public enum ToolType

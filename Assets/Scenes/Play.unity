@@ -1021,8 +1021,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelImprint: {fileID: 1494667700}
   standardLevels:
-  - name: Room 1
-    room: 1
+  - name: Room 31
+    room: 31
     items:
     - name: Portal Return 0
       type: 1
@@ -1034,13 +1034,13 @@ MonoBehaviour:
       portalType: 3
       installedTool: 0
       installedNumber: 0
-    - name: Tool Add 30
+    - name: Tool Subtract 30
       type: 4
       number: 30
       point:
         x: -2
         y: 4
-      toolType: 1
+      toolType: 2
       portalType: 0
       installedTool: 0
       installedNumber: 0
@@ -1075,6 +1075,29 @@ MonoBehaviour:
         y: 2
       toolType: 0
       portalType: 1
+      installedTool: 0
+      installedNumber: 0
+  - name: Room 1
+    room: 1
+    items:
+    - name: Portal Return 0
+      type: 1
+      number: 0
+      point:
+        x: 0
+        y: 0
+      toolType: 0
+      portalType: 3
+      installedTool: 0
+      installedNumber: 0
+    - name: Victory 0
+      type: 12
+      number: 0
+      point:
+        x: 0
+        y: 0
+      toolType: 0
+      portalType: 3
       installedTool: 0
       installedNumber: 0
   dynamicLevels:
@@ -1138,9 +1161,9 @@ MonoBehaviour:
       portalType: 3
       installedTool: 0
       installedNumber: 0
-    - name: Orb 1
+    - name: Orb 31
       type: 2
-      number: 1
+      number: 31
       point:
         x: 0
         y: 5
