@@ -39,7 +39,7 @@ public class Hammer: MonoBehaviour
 
 			// Remove item from level manager
 			item.type = ItemType.None;
-			game.levelManager.ChangeItem(game.level.number, item);
+			game.levelManager.ChangeItem(game.level.room, item);
 		}
 	}
 }

@@ -215,9 +215,9 @@ namespace Spewnity
 				GameObject.DestroyImmediate(tform.GetChild(i).gameObject);
 		}
 
-		public static void ThrowIfNull(this object o)
+		public static void ThrowIfNull(this object o, string msg = "NullReferenceException")
 		{
-			if(o == null) throw new System.NullReferenceException();
+			if(o == null) throw new System.NullReferenceException(msg);
 		}
 	}
 }

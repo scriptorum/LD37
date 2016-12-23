@@ -1,30 +1,48 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using Spewnity;
 
 public class LevelManager : MonoBehaviour
 {
 	public Text levelImprint;
-	public LevelData[] levels;
-	public Dictionary<int,LevelData> levelCache = new Dictionary<int,LevelData>();
+	public LevelDefinition[] standardLevels;
+	public LevelDefinition[] dynamicLevels;
+	public LevelDefinition defaultLevel;
+	public int dynamicRangeMin;
 
 	[HideInInspector] // last loaded number
-	public int number = Level.NO_LEVEL;
-
-	[HideInInspector]
-	public bool cacheNeedsUpdate = false;
+	public int room = Level.NO_LEVEL;
 
 	public void Awake()
 	{
 		levelImprint.ThrowIfNull();
-		UpdateCache();
+	}
+
+	public LevelDefinition GetLevelDefinition(int levelNo)
+	{
+		// Look for standard level
+		foreach(LevelDefinition data in standardLevels)
+			if(data.room == levelNo)
+				return data;
+		
+		// Provide dynamic level
+		int min = dynamicRangeMin;
+		foreach(LevelDefinition data in dynamicLevels)
+		{
+			if(levelNo >= min && levelNo <= data.room)
+				return data;
+
+			min = data.room + 1;			
+		}
+
+		return defaultLevel;
 	}
 
 	public void SetReturnPortal(int onLevel, int toNumber)
 	{
-		LevelData data = levelCache[onLevel];
+		LevelDefinition data = GetLevelDefinition(onLevel);
 		for(int i = 0; i < data.items.Length; i++)
 		{
 			if(data.items[i].type == ItemType.Portal && data.items[i].portalType == PortalType.Return)
@@ -35,62 +53,47 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-	public bool IsValidLevel(int levelNo)
-	{
-		return levelCache.ContainsKey(levelNo);
-	}
-
 	public void OnValidate()
 	{
-		cacheNeedsUpdate = true;
-		foreach(LevelData data in levels)
-		{
-			data.name = "Room " + data.number.ToString();
-			int numReturns = 0;
-			for(int i = 0; i < data.items.Length; i++)
-			{
-				data.items[i].name = data.items[i].type.ToString();
-				if(data.items[i].type == ItemType.Portal) data.items[i].name += " " + data.items[i].portalType;
-				if(data.items[i].type == ItemType.Tool) data.items[i].name += " " + data.items[i].toolType;
-				data.items[i].name += " " + data.items[i].number;
-				if(data.items[i].type == ItemType.Portal && data.items[i].portalType == PortalType.Return) numReturns++;
-			}
-			if(numReturns != 1) Debug.Log("WARNING: Level " + data.number + " has " + numReturns + " return portals!");
-		}
+		foreach(LevelDefinition data in standardLevels)
+			ValidateLevel(data);
+		foreach(LevelDefinition data in dynamicLevels)
+			ValidateLevel(data);
+		ValidateLevel(defaultLevel);
 	}
 
-	public void UpdateCache()
-	{
-		levelCache = new Dictionary<int,LevelData>();
-		foreach(LevelData level in levels) levelCache[level.number] = level;
-		cacheNeedsUpdate = false;
+	private void ValidateLevel(LevelDefinition data)
+	{	
+		data.name = "Room " + data.room.ToString();
+		int numReturns = 0;
+		for(int i = 0; i < data.items.Length; i++)
+		{
+			data.items[i].name = data.items[i].type.ToString();
+			if(data.items[i].type == ItemType.Portal) data.items[i].name += " " + data.items[i].portalType;
+			if(data.items[i].type == ItemType.Tool) data.items[i].name += " " + data.items[i].toolType;
+			data.items[i].name += " " + data.items[i].number;
+			if(data.items[i].type == ItemType.Portal && data.items[i].portalType == PortalType.Return) numReturns++;
+		}
+		if(numReturns != 1) Debug.Log("WARNING: Level " + data.room + " has " + numReturns + " return portals!");
 	}
 
 	public void SetImprint(int level)
 	{
-		number = level;
+		room = level;
 		levelImprint.text = level.ToString();
 	}
 
-	public LevelData Load(int level)
+	public LevelDefinition Load(int level)
 	{
-		if(cacheNeedsUpdate) UpdateCache();
-		
 		SetImprint(level);
-
-		if(levelCache.ContainsKey(level)) return levelCache[level];
-
-		throw new UnityException("Cannot load level " + level);
+		return GetLevelDefinition(level);
 	}
 		
 	// Changes the item in question
 	// Places this item at the point on on the level "number" it contains
 	public void ChangeItem(int roomNo, Item item)
 	{
-		if(!levelCache.ContainsKey(roomNo))
-			throw new UnityException("LevelManager cannot find room " + roomNo);
-
-		LevelData data = levelCache[roomNo];
+		LevelDefinition data = GetLevelDefinition(roomNo);
 		for(int i = 0; i < data.items.Length; i++)
 		{
 			if(data.items[i].point == item.point)
@@ -105,12 +108,12 @@ public class LevelManager : MonoBehaviour
 }
 
 [System.Serializable]
-public class LevelData
+public class LevelDefinition
 {
 	[HideInInspector]
 	public string name;
 
-	public int number;
+	public int room;
 	public Item[] items;
 }
 
@@ -145,6 +148,7 @@ public enum ItemType
 	BigGun,
 	SpeedBoots,
 	Teleporter,
+	Spawner,
 	Map
 }
 

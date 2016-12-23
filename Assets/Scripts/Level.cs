@@ -12,7 +12,7 @@ public class Level : MonoBehaviour
 {
 	public static int NO_LEVEL = -99999;
 
-	public int number = NO_LEVEL;
+	public int room = NO_LEVEL;
 	public int priorLevel = NO_LEVEL;
 
 	[HeaderAttribute("Prefabs")]
@@ -37,12 +37,12 @@ public class Level : MonoBehaviour
 
 	public void Load(int levelNo, bool returning, int portalNo)
 	{
-		priorLevel = number;
-		number = levelNo;
+		priorLevel = room;
+		room = levelNo;
 		GameObject go;
 		Clear();
 
-		LevelData data = game.levelManager.Load(levelNo);
+		LevelDefinition data = game.levelManager.Load(levelNo);
 		Portal arrivalPortal = null;
 
 		foreach(Item item in data.items)
@@ -94,7 +94,7 @@ public class Level : MonoBehaviour
 			go.transform.localPosition = new Vector3(item.point.x, item.point.y, 0);
 		}
 
-		arrivalPortal.ThrowIfNull();
+		arrivalPortal.ThrowIfNull("Arrival portal not set");
 		game.player.ArriveAt(arrivalPortal);
 	}
 
@@ -103,7 +103,7 @@ public class Level : MonoBehaviour
 		// Change LevelManager item from orb to portal so it respawns correctly when returning to this room
 		orb.item.type = ItemType.Portal;
 		orb.item.portalType = PortalType.Open;
-		game.levelManager.ChangeItem(number, orb.item);
+		game.levelManager.ChangeItem(room, orb.item);
 
 		// Create Portal
 		GameObject go = Create(portalPrefab);
@@ -136,12 +136,12 @@ public class Level : MonoBehaviour
 	public static void  ReadLevel(MenuCommand cmd)
 	{
 		Level level = (Level) cmd.context;		
-		level.Load(level.number, false, 0);
+		level.Load(level.room, false, 0);
 	}
 
 	public void OnValidate()
 	{
-		if(game.levelManager.number != number) Invoke("Reload", 0.25f);
+		if(game.levelManager.room != room) Invoke("Reload", 0.25f);
 	}
 	#endif
 }

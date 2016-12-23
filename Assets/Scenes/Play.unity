@@ -469,103 +469,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &665135735
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1649534805}
-    m_Modifications:
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1640270487454578, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114010758423506794, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: sequenceName
-      value: closed
-      objectReference: {fileID: 0}
-    - target: {fileID: 212473659458796066, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300034, guid: 517f66f3b26814b379df803db6f40473,
-        type: 3}
-    - target: {fileID: 114443913788763444, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Text
-      value: 98
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: game
-      value: 
-      objectReference: {fileID: 561127321}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.name
-      value: Portal Closed 98
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.number
-      value: 98
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.point.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.point.y
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.portalType
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &665135736 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623,
-    type: 2}
-  m_PrefabInternal: {fileID: 665135735}
 --- !u!4 &673475446 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4710055754631816, guid: d11fbc6ddaa234b25ab7da61f087d1d8,
@@ -807,146 +710,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 5
   m_TargetDisplay: 0
---- !u!1001 &1326183250
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1649534805}
-    m_Modifications:
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212473659458796066, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300052, guid: 517f66f3b26814b379df803db6f40473,
-        type: 3}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: game
-      value: 
-      objectReference: {fileID: 561127321}
-    - target: {fileID: 114010758423506794, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: sequenceName
-      value: return
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &1326183251 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623,
-    type: 2}
-  m_PrefabInternal: {fileID: 1326183250}
---- !u!1001 &1396526541
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1649534805}
-    m_Modifications:
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114443913788763444, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: m_Text
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: game
-      value: 
-      objectReference: {fileID: 561127321}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.name
-      value: Portal Open 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.number
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.point.x
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114736680730521934, guid: 5726ff09129f04573a2fbd99ecc6b623,
-        type: 2}
-      propertyPath: item.portalType
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5726ff09129f04573a2fbd99ecc6b623, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &1396526542 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4820203871772348, guid: 5726ff09129f04573a2fbd99ecc6b623,
-    type: 2}
-  m_PrefabInternal: {fileID: 1396526541}
 --- !u!114 &1474488930 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114787341915130000, guid: 1426c6b7344944b31a45f01fe79e498e,
@@ -1054,8 +817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86bac59de7f7f4fcaa5f36bc545007b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  number: 99
-  priorLevel: 99
+  room: 1
+  priorLevel: -99999
   portalPrefab: {fileID: 1369883517643206, guid: 5726ff09129f04573a2fbd99ecc6b623,
     type: 2}
   hammerPrefab: {fileID: 1782184024736294, guid: 8846b500b2e1642b6884bc2ee596c6e5,
@@ -1081,10 +844,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1326183251}
-  - {fileID: 1396526542}
-  - {fileID: 665135736}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1260,158 +1020,136 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelImprint: {fileID: 1494667700}
-  levels:
+  standardLevels:
+  - name: Room 1
+    room: 1
+    items:
+    - name: Portal Return 0
+      type: 1
+      number: 0
+      point:
+        x: 5
+        y: -2
+      toolType: 0
+      portalType: 3
+      installedTool: 0
+      installedNumber: 0
+    - name: Tool Add 30
+      type: 4
+      number: 30
+      point:
+        x: -2
+        y: 4
+      toolType: 1
+      portalType: 0
+      installedTool: 0
+      installedNumber: 0
   - name: Room 99
-    number: 99
+    room: 99
     items:
     - name: Portal Return -99999
       type: 1
       number: -99999
       point:
         x: 5
-        y: 5
+        y: -2
       toolType: 0
       portalType: 3
       installedTool: 0
       installedNumber: 0
-    - name: Portal Open 50
+    - name: Portal Open 30
       type: 1
-      number: 50
+      number: 30
       point:
         x: -5
-        y: 5
+        y: 2
       toolType: 0
       portalType: 1
       installedTool: 0
       installedNumber: 0
-    - name: Portal Closed 98
+    - name: Portal Open 70
       type: 1
-      number: 98
+      number: 70
+      point:
+        x: 5
+        y: 2
+      toolType: 0
+      portalType: 1
+      installedTool: 0
+      installedNumber: 0
+  dynamicLevels:
+  - name: Room 25
+    room: 25
+    items:
+    - name: Portal Return 0
+      type: 1
+      number: 0
+      point:
+        x: 5
+        y: -2
+      toolType: 0
+      portalType: 3
+      installedTool: 0
+      installedNumber: 0
+    - name: Portal Open -10
+      type: 1
+      number: -10
       point:
         x: 0
-        y: -5
+        y: -2
       toolType: 0
-      portalType: 2
+      portalType: 1
       installedTool: 0
       installedNumber: 0
   - name: Room 50
-    number: 50
+    room: 50
     items:
-    - name: Portal Return -99999
+    - name: Portal Return 0
       type: 1
-      number: -99999
+      number: 0
       point:
-        x: -5
+        x: 5
+        y: -2
+      toolType: 0
+      portalType: 3
+      installedTool: 0
+      installedNumber: 0
+    - name: Hammer -10
+      type: 3
+      number: -10
+      point:
+        x: 0
+        y: -2
+      toolType: 0
+      portalType: 1
+      installedTool: 0
+      installedNumber: 0
+  defaultLevel:
+    name: Room 0
+    room: 0
+    items:
+    - name: Portal Return 0
+      type: 1
+      number: 0
+      point:
+        x: 0
+        y: -5
+      toolType: 0
+      portalType: 3
+      installedTool: 0
+      installedNumber: 0
+    - name: Orb 1
+      type: 2
+      number: 1
+      point:
+        x: 0
         y: 5
       toolType: 0
       portalType: 3
       installedTool: 0
       installedNumber: 0
-    - name: Hammer 0
-      type: 3
-      number: 0
-      point:
-        x: 1
-        y: 4
-      toolType: 0
-      portalType: 2
-      installedTool: 0
-      installedNumber: 0
-    - name: Orb 10
-      type: 2
-      number: 10
-      point:
-        x: 2
-        y: -4
-      toolType: 0
-      portalType: 2
-      installedTool: 0
-      installedNumber: 0
-    - name: Portal Open 15
-      type: 1
-      number: 15
-      point:
-        x: -5
-        y: -4
-      toolType: 0
-      portalType: 1
-      installedTool: 0
-      installedNumber: 0
-  - name: Room 15
-    number: 15
-    items:
-    - name: Portal Return -99999
-      type: 1
-      number: -99999
-      point:
-        x: 5
-        y: 0
-      toolType: 0
-      portalType: 3
-      installedTool: 0
-      installedNumber: 0
-    - name: Portal Open 50
-      type: 1
-      number: 50
-      point:
-        x: -6
-        y: 2
-      toolType: 0
-      portalType: 1
-      installedTool: 0
-      installedNumber: 0
-    - name: Portal Open 99
-      type: 1
-      number: 99
-      point:
-        x: -2
-        y: -5
-      toolType: 0
-      portalType: 1
-      installedTool: 0
-      installedNumber: 0
-    - name: Tool Add -99999
-      type: 4
-      number: -99999
-      point:
-        x: 2
-        y: 2
-      toolType: 1
-      portalType: 1
-      installedTool: 0
-      installedNumber: 0
-    - name: Tool Subtract -99999
-      type: 4
-      number: -99999
-      point:
-        x: 0
-        y: 2
-      toolType: 2
-      portalType: 1
-      installedTool: 0
-      installedNumber: 0
-    - name: Tool Multiply -99999
-      type: 4
-      number: -99999
-      point:
-        x: -2
-        y: 2
-      toolType: 3
-      portalType: 1
-      installedTool: 0
-      installedNumber: 0
-    - name: Tool Divide -99999
-      type: 4
-      number: -99999
-      point:
-        x: -4
-        y: 2
-      toolType: 4
-      portalType: 1
-      installedTool: 0
-      installedNumber: 0
-  number: 99
-  cacheNeedsUpdate: 0
+  dynamicRangeMin: 2
+  room: -99999
 --- !u!4 &1813284758
 Transform:
   m_ObjectHideFlags: 0

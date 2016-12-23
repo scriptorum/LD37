@@ -164,7 +164,7 @@ public class Portal : MonoBehaviour
                 // Remove tool from portal
                 item.installedTool = ToolType.None;
                 item.installedNumber = Level.NO_LEVEL;
-                game.levelManager.ChangeItem(game.level.number, item);
+                game.levelManager.ChangeItem(game.level.room, item);
                 UpdateView();
                 return;
             }
@@ -192,7 +192,7 @@ public class Portal : MonoBehaviour
                 {
                     item.portalType = PortalType.Open; // change to open portal
                     item.number = slot.number;  // using number from portal tool in inventory slot
-                    game.levelManager.ChangeItem(game.level.number, item); // Remember changes
+                    game.levelManager.ChangeItem(game.level.room, item); // Remember changes
                     UpdateView(); // Change portal on display
                     slot.number = Level.NO_LEVEL; // Remove portal number from tool in inventory
                     slot.UpdateView(); // Update inventory display
@@ -211,7 +211,7 @@ public class Portal : MonoBehaviour
                 slot.number = item.number;  // Copy portal number into tool
                 slot.UpdateView();  // Update the inventory display
                 item.portalType = PortalType.Closed; // Close portal
-                game.levelManager.ChangeItem(game.level.number, item); // Remember change
+                game.levelManager.ChangeItem(game.level.room, item); // Remember change
                 UpdateView(); // Update display of portal
                 game.SetMessage("You collect portal " + item.number + " into the " + slot.toolType + " tool");
                 return;
@@ -223,7 +223,7 @@ public class Portal : MonoBehaviour
                 // TODO Put "final" number in slot.number
                 item.installedNumber = slot.number; // Copy tool number into portal
                 item.installedTool = slot.toolType; // Copy tool type (add, subtract, etc) into portal
-                game.levelManager.ChangeItem(game.level.number, item); // Remember changes
+                game.levelManager.ChangeItem(game.level.room, item); // Remember changes
                 UpdateView(); // Update display of portal to show augmentation
                 slot.Remove(); // Remove inventory slot
                 game.SetMessage("You augment the portal with the " + item.installedTool + " tool");

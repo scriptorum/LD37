@@ -69,7 +69,7 @@ public class Tool : MonoBehaviour
 		{
 			game.inventory.TakeActive(ItemType.Tool, item.toolType, Level.NO_LEVEL);
 			item.type = ItemType.None;
-			game.levelManager.ChangeItem(game.level.number, item);
+			game.levelManager.ChangeItem(game.level.room, item);
 			Object.Destroy(this.gameObject);
 			game.SetMessage("You pick up the Portal " + getToolType() + ". Q/E to select it, R to use it.");
 		}
