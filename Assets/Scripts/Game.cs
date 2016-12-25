@@ -15,15 +15,24 @@ public class Game : MonoBehaviour
     public float messageHold = 3.0f;
     public float messageFade = 1.0f;
 
+    public Sprite[] bgTilesTens;
+    public Sprite[] bgTilesOnes;
+
     private Text messageBar;
     private Text messageShadow;
     private ActionQueue aq;
+    private SpriteRenderer upperBg;
+    private SpriteRenderer lowerBg;
 
     public void Awake()
     {
         messageBar = GameObject.Find("MessageBar").GetComponent<Text>();
         messageShadow = GameObject.Find("MessageShadow").GetComponent<Text>();
         aq = gameObject.AddComponent<ActionQueue>();
+        Debug.Assert(bgTilesTens.Length == 10);
+        Debug.Assert(bgTilesOnes.Length == 10);
+        upperBg = GameObject.Find("BGUpper").GetComponent<SpriteRenderer>();
+        lowerBg = GameObject.Find("BGLower").GetComponent<SpriteRenderer>();
     }
 
     public void Start()
@@ -31,6 +40,7 @@ public class Game : MonoBehaviour
 
         SetMessage("Escape! Follow the portals to ROOM ONE.");
         level.Load(startLevel, false, startLevel);
+        UpdateBackground();
     }
 
     public void ClearMessage()
@@ -77,5 +87,15 @@ public class Game : MonoBehaviour
         }
         else if (portalType == PortalType.Return)
             level.Load(destination, true, level.room);
+
+        UpdateBackground();        
+    }
+
+    public void UpdateBackground()
+    {
+        int ones = level.room % 10;
+        int tens = ((int)(level.room / 10)) % 10;
+        lowerBg.sprite = bgTilesTens[tens];
+        upperBg.sprite = bgTilesOnes[ones];
     }
 }

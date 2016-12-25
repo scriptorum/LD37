@@ -56,6 +56,7 @@ public class Level : MonoBehaviour
 
 					if(returning) // returning to sending portal 
 					{
+						// TODO This won't work when returning from an augmented portal
 						if(item.portalType == PortalType.Open && item.number == portalNo) arrivalPortal = portal;
 					}
 					else // arriving at return portal
@@ -102,7 +103,7 @@ public class Level : MonoBehaviour
 			}
 		}
 
-		arrivalPortal.ThrowIfNull("Arrival portal not set");
+		arrivalPortal.ThrowIfNull("Arrival portal not set in room " + room);
 		game.player.ArriveAt(arrivalPortal);
 	}
 
