@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Spewnity;
+using System.Linq;
 
 public class Game : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Game : MonoBehaviour
     private ActionQueue aq;
     private SpriteRenderer upperBg;
     private SpriteRenderer lowerBg;
+    private bool showLevelJumpIMGUI = false;
 
     public void Awake()
     {
@@ -31,8 +33,8 @@ public class Game : MonoBehaviour
         aq = gameObject.AddComponent<ActionQueue>();
         Debug.Assert(bgTilesTens.Length == 10);
         Debug.Assert(bgTilesOnes.Length == 10);
-        upperBg = GameObject.Find("BGUpper").GetComponent<SpriteRenderer>();
-        lowerBg = GameObject.Find("BGLower").GetComponent<SpriteRenderer>();
+        upperBg = GameObject.Find("BGTop").GetComponent<SpriteRenderer>();
+        lowerBg = GameObject.Find("BGMiddle").GetComponent<SpriteRenderer>();
     }
 
     public void Start()
@@ -97,5 +99,45 @@ public class Game : MonoBehaviour
         int tens = ((int)(level.room / 10)) % 10;
         lowerBg.sprite = bgTilesTens[tens];
         upperBg.sprite = bgTilesOnes[ones];
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            showLevelJumpIMGUI = !showLevelJumpIMGUI;
+            jumpLevel = level.room.ToString();
+        }
+    }
+
+    private string jumpLevel = Level.NO_LEVEL.ToString();
+    public void OnGUI()
+    {
+        if(!showLevelJumpIMGUI)
+            return;
+
+        GUI.Box (new Rect (10,10,140,60), "Jump to Level");
+
+        GUI.SetNextControlName("room");
+        string nextJumpLevel = GUI.TextField(new Rect (20,40,100,20), jumpLevel.ToString());
+        if(nextJumpLevel.All(char.IsDigit))
+            jumpLevel = nextJumpLevel;
+
+        if(GUI.GetNameOfFocusedControl() != "room")
+            GUI.FocusControl("room");
+        
+        Event e = Event.current;
+        if(e.keyCode == KeyCode.Return)
+        {
+            showLevelJumpIMGUI = false;
+            GUI.FocusControl(null);
+            int room = int.Parse(jumpLevel);
+            TeleportTo(room, PortalType.Open);
+        }
+        else if(e.keyCode == KeyCode.Escape)
+        {
+            showLevelJumpIMGUI = false;
+            GUI.FocusControl(null);
+        }
     }
 }
