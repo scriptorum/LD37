@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1726873057396858}
   m_IsPrefabParent: 1
+--- !u!1 &1325296819188980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4962583029972590}
+  - component: {fileID: 108962072360438844}
+  m_Layer: 0
+  m_Name: Area Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1726873057396858
 GameObject:
   m_ObjectHideFlags: 0
@@ -38,12 +54,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726873057396858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.3, y: 5, z: 0}
+  m_LocalPosition: {x: 5, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4962583029972590}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4962583029972590
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325296819188980}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -5, y: 2, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4710055754631816}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!50 &50394070121886694
 Rigidbody2D:
   serializedVersion: 4
@@ -78,6 +108,40 @@ BoxCollider2D:
   m_Offset: {x: 0.0037817955, y: -0.1550579}
   serializedVersion: 2
   m_Size: {x: 1.0091479, y: 1.689887}
+--- !u!108 &108962072360438844
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325296819188980}
+  m_Enabled: 1
+  serializedVersion: 7
+  m_Type: 3
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 2
+  m_AreaSize: {x: 1, y: 1.0000005}
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!114 &114697747121541372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,19 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb2edaf56aaa4277a5d823f998f349a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hammerInInventory: {fileID: 0}
-  adderInInventory: {fileID: 0}
-  subtracterInInventory: {fileID: 0}
-  dividerInInventory: {fileID: 0}
-  multiplierInInventory: {fileID: 0}
   game: {fileID: 0}
   speed: 10
   mustReleaseInputs: 0
-  hasHammer: 0
-  hasAdder: 0
-  hasSubtracter: 0
-  hasDivider: 0
-  hasMultiplier: 0
 --- !u!212 &212067168418216284
 SpriteRenderer:
   m_ObjectHideFlags: 1
